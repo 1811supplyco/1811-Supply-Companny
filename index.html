@@ -71,9 +71,11 @@
 </head>
 <body id="body-tag">
 
-    <div class="bg-white text-black text-[9px] font-black tracking-[0.2em] py-2 text-center uppercase sticky top-0 z-[110]">
-        ENVÍOS GRATIS PARA TODO LIMA
-    </div>
+    <div class="bg-white text-white py-2 text-center h-auto min-h-[36px] flex items-center justify-center">
+    <span id="promo-banner" class="text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-opacity duration-500 opacity-100">
+        ENVIO GRATIS PARA TODO LIMA
+    </span>
+</div>
 
     <nav class="p-4 md:p-6 sticky top-[30px] bg-[#0a0a0a] z-[100] border-b border-white/5">
         <div class="container mx-auto flex justify-between items-center">
@@ -483,8 +485,32 @@
         function goHome() {
             window.location.href = 'index.html';
         }
+       // --- ANIMACIÓN DEL BANNER PROMOCIONAL ---
+let bannerIndex = 0;
+const bannerMessages = [
+    "ENVIO GRATIS PARA TODO LIMA",
+    "APROVECHA EL 15% OFF POR EL DÍA DEL PADRE"
+];
+
+// Cambia el mensaje cada 4 segundos (4000 milisegundos)
+setInterval(() => {
+    const banner = document.getElementById('promo-banner');
+    if(!banner) return;
+    
+    // 1. Oculta el texto suavemente (Fade out)
+    banner.classList.remove('opacity-100');
+    banner.classList.add('opacity-0');
+    
+    // 2. Espera medio segundo a que desaparezca para cambiar la frase
+    setTimeout(() => {
+        bannerIndex = (bannerIndex + 1) % bannerMessages.length;
+        banner.innerText = bannerMessages[bannerIndex];
         
-        // Ejecutar init al cargar la página
+        // 3. Vuelve a mostrar el texto (Fade in)
+        banner.classList.remove('opacity-0');
+        banner.classList.add('opacity-100');
+    }, 500); 
+}, 4000);
         window.onload = init;
     </script>
 </body>
