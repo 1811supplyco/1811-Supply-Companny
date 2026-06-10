@@ -8,15 +8,18 @@
     
     <title>1811 Supply Co. | Shop</title>
     
+    <!-- 1. Descripción principal para GOOGLE -->
     <meta name="description" content="Artículos bravazos con los mejores materiales hechos en Perú.">
     
+    <!-- 2. Etiquetas Open Graph para FACEBOOK, INSTAGRAM Y WHATSAPP -->
     <meta property="og:title" content="1811 Supply Co. | Shop" />
     <meta property="og:description" content="Artículos bravazos con los mejores materiales hechos en Perú." />
     <meta property="og:url" content="https://1811supplyco.github.io/1811-Supply-Company/" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://1811supplyco.github.io/1811-Supply-Company/logo2.png" />
 
-    <script type=\"application/ld+json\">
+    <!-- 3. Tu código de Schema -->
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
@@ -25,461 +28,423 @@
       "url": "https://1811supplyco.github.io/1811-Supply-Company/"
     }
     </script>
-    <link rel="icon" type="image/jpeg" href="images/icono.jpeg">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- 4. Tus íconos -->
+    <link rel="icon" type="image/png" href="images/icono.png">
+    <link class="image-icon" rel="apple-touch-icon" href="images/icono.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #0d0d0d; color: #ffffff; margin: 0; }
-        .font-title { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; }
+        body { background-color: #0a0a0a; color: #d1d1d1; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
+        .product-card { background-color: #111111; border: 1px solid #1f1f1f; display: flex; flex-direction: column; height: 100%; }
+        
+        .category-btn { text-align: left; padding: 12px 0; border-bottom: 1px solid #1f1f1f; font-size: 11px; font-weight: 900; color: #555; text-transform: uppercase; transition: 0.3s; width: 100%; }
+        .category-btn.active { color: white; border-bottom-color: white; padding-left: 10px; }
+
+        .variant-btn { border: 1px solid #333; font-size: 9px; padding: 6px 10px; cursor: pointer; color: #666; font-weight: 900; text-transform: uppercase; transition: 0.2s; }
+        .variant-btn.selected { background-color: white; color: black; border-color: white; }
+        
+        #cart-sidebar { position: fixed; right: -100%; top: 0; width: 85%; max-width: 380px; height: 100%; background: #0f0f0f; z-index: 200; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid #222; }
+        #cart-sidebar.open { right: 0; }
+        .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 150; display: none; }
+        .cart-overlay.active { display: block; }
+
+        /* ESTILOS CARRUSEL TÁCTIL + PC */
+        .carousel-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; height: 100%; }
+        .carousel-container::-webkit-scrollbar { display: none; }
+        .carousel-item { min-width: 100%; height: 100%; scroll-snap-align: start; }
+
+        .nav-area { position: absolute; top: 0; height: 100%; width: 35%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 60; }
+        .left-area { left: 0; }
+        .right-area { right: 0; }
+        .nav-arrow-mini { background: rgba(255, 255, 255, 0.1); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; opacity: 0; transition: all 0.2s ease; backdrop-filter: blur(4px); }
+        .nav-area:hover .nav-arrow-mini { opacity: 1; background: rgba(255, 255, 255, 0.9); color: black; }
+        
+        @media (max-width: 768px) { .nav-area { display: none; } }
+
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .panel-transition { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        #category-panel-mobile { transform: translateX(-100%); }
-        #category-panel-mobile.active { transform: translateX(0); }
-        #cart-panel { transform: translateX(100%); }
-        #cart-panel.active { transform: translateX(0); }
-        .product-card { background-color: #141414; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.5); }
-        .variant-dot { width: 14px; height: 14px; border-radius: 50%; cursor: pointer; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.2); }
-        .variant-dot.active { transform: scale(1.3); border-color: #ffffff; }
+        body.product-open #mobile-cat-trigger { display: block; }
+        #category-panel-mobile { position: fixed; top: 104px; left: 0; width: 100%; background: #0a0a0a; z-index: 90; padding: 20px; border-bottom: 1px solid #1f1f1f; display: none; }
+        #category-panel-mobile.active { display: block; }
+        .category-slider { display: flex; overflow-x: auto; scroll-behavior: smooth; gap: 15px; padding: 10px 0; }
+        .category-slider::-webkit-scrollbar { display: none; }
+        .category-banner { background: #111; border: 1px solid #1f1f1f; padding: 20px; margin-bottom: 40px; border-radius: 4px; }
+        .titulo-destacado { font-family: 'Oswald', sans-serif !important; font-weight: 700; line-height: 1.2; letter-spacing: 0.05em; }
     </style>
 </head>
-<body>
+<body id="body-tag">
 
-    <div class="bg-white text-black text-[10px] font-black uppercase tracking-widest py-2 text-center border-b border-zinc-800">
-        ENVIOS A TODO EL PERÚ • 1811 SUPPLY CO.
+    <div class="bg-white text-black text-[9px] font-black tracking-[0.2em] py-2 text-center uppercase sticky top-0 z-[110]">
+        ENVÍOS GRATIS PARA TODO LIMA
     </div>
 
-    <nav class="sticky top-0 z-40 bg-[#0d0d0d]/90 backdrop-blur-md border-b border-zinc-900 px-4 py-3 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <button class="md:hidden text-white" onclick="toggleCategoriesMobile()">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-            </button>
-            <a href="index.html" class="font-title text-lg tracking-tighter text-white">1811 SUPPLY CO.</a>
-        </div>
-        
-        <div class="hidden md:flex items-center gap-6 text-[11px] font-black uppercase tracking-wider text-zinc-400">
-            <button onclick="filterProducts('all')" class="hover:text-white transition">Todos</button>
-            <button onclick="filterProducts('STRAPS')" class="hover:text-white transition">Straps</button>
-            <button onclick="filterProducts('DOPP KITS')" class="hover:text-white transition">Dopp Kits</button>
-            <button onclick="filterProducts('BILLETERAS')" class="hover:text-white transition">Billeteras</button>
-            <button onclick="filterProducts('TARJETEROS')" class="hover:text-white transition">Tarjeteros</button>
-            <button onclick="filterProducts('PORTAPASAPORTES')" class="hover:text-white transition">Portapasaportes</button>
-            <button onclick="filterProducts('LLAVEROS')" class="hover:text-white transition">Llaveros</button>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <button class="relative text-white p-1" onclick="toggleCart()">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                <span id="cart-count" class="absolute -top-1 -right-1 bg-white text-black font-black text-[9px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+    <nav class="p-4 md:p-6 sticky top-[30px] bg-[#0a0a0a] z-[100] border-b border-white/5">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="block">
+                    <img src="logo2.png" alt="1811 Logo" class="h-10 md:h-16 w-auto object-contain">
+                </a>
+                <button id="mobile-cat-trigger" onclick="toggleCategoriesMobile()" class="md:hidden text-[10px] font-black uppercase tracking-widest text-white bg-white/5 px-3 py-2 rounded">Categorías</button>
+            </div>
+            <button onclick="toggleCart()" class="border border-white/10 px-4 py-2 text-[10px] font-black tracking-widest text-white uppercase">
+                CARRITO (<span id="cart-count">0</span>)
             </button>
         </div>
     </nav>
 
-    <div id="category-panel-mobile" class="fixed inset-y-0 left-0 z-50 w-64 bg-[#0d0d0d] border-r border-zinc-900 p-6 panel-transition md:hidden">
-        <div class="flex items-center justify-between mb-8">
-            <h3 class="font-title text-sm tracking-wider text-zinc-400">Categorías</h3>
-            <button class="text-white" onclick="toggleCategoriesMobile()">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-            </button>
-        </div>
-        <div class="flex flex-col gap-5 text-xs font-black uppercase tracking-widest text-zinc-400">
-            <button onclick="filterProducts('all'); toggleCategoriesMobile()" class="text-left hover:text-white transition">Todos</button>
-            <button onclick="filterProducts('STRAPS'); toggleCategoriesMobile()" class="text-left hover:text-white transition">Straps</button>
-            <button onclick="filterProducts('DOPP KITS'); toggleCategoriesMobile()" class="text-left hover:text-white transition">Dopp Kits</button>
-            <button onclick="filterProducts('BILLETERAS'); toggleCategoriesMobile()" class="text-left hover:text-white transition">Billeteras</button>
-            <button onclick="filterProducts('TARJETEROS'); toggleCategoriesMobile()" class="text-left hover:text-white transition">Tarjeteros</button>
-            <button onclick="filterProducts('PORTAPASAPORTES'); toggleCategoriesMobile()" class="text-left hover:text-white transition">Portapasaportes</button>
-            <button onclick="filterProducts('LLAVEROS'); toggleCategoriesMobile()" class="text-left hover:text-white transition">Llaveros</button>
+    <div id="category-panel-mobile" class="md:hidden">
+        <div class="grid grid-cols-2 gap-2">
+            <button onclick="filterProducts('TODOS')" class="text-[9px] font-black p-3 border border-white/10 text-white uppercase">INICIO</button>
+            <button onclick="filterProducts('BILLETERAS')" class="text-[9px] font-black p-3 border border-white/10 text-white uppercase">BILLETERAS</button>
+            <button onclick="filterProducts('ACCESORIOS')" class="text-[9px] font-black p-3 border border-white/10 text-white uppercase">ACCESORIOS</button>
+            <button onclick="filterProducts('BOLSOS')" class="text-[9px] font-black p-3 border border-white/10 text-white uppercase">BOLSOS</button>
+            <button onclick="filterProducts('CINTURONES')" class="text-[9px] font-black p-3 border border-white/10 text-white uppercase">CINTURONES</button>
+            <button onclick="filterProducts('LLAVEROS')" class="text-[9px] font-black p-3 border border-white/10 text-white uppercase">LLAVEROS</button>
+            <button onclick="filterProducts('BEADS')" class="text-[9px] font-black p-3 border border-white/10 text-white uppercase">BEADS</button>
+            <button onclick="filterProducts('STAGE GEAR')" class="text-[9px] font-black p-3 border border-white/10 text-white uppercase">STAGE GEAR</button>
         </div>
     </div>
 
-    <div id="cart-panel" class="fixed inset-y-0 right-0 z-50 w-full sm:w-80 bg-[#0d0d0d] border-l border-zinc-900 p-6 panel-transition flex flex-col justify-between">
-        <div>
-            <div class="flex items-center justify-between mb-6 border-b border-zinc-900 pb-4">
-                <h3 class="font-title text-sm tracking-wider">Tu Carrito</h3>
-                <button class="text-white" onclick="toggleCart()">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-            </div>
-            <div id="cart-items" class="flex flex-col gap-4 overflow-y-auto max-h-[60vh] no-scrollbar">
-                </div>
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+    <div id="cart-sidebar" class="flex flex-col">
+        <div class="p-6 border-b border-white/5 flex justify-between items-center">
+            <h2 class="text-[11px] font-black tracking-[0.3em] uppercase text-white">Tu Selección</h2>
+            <button onclick="toggleCart()" class="text-xs text-gray-500 font-bold uppercase">Cerrar</button>
         </div>
-        <div class="border-t border-zinc-900 pt-4 mt-4">
-            <div class="flex items-center justify-between font-black uppercase text-xs mb-4">
-                <span>Total</span>
-                <span id="cart-total">S/ 0.00</span>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 no-scrollbar space-y-6"></div>
+   
+        <div class="p-6 border-t border-white/5 bg-[#141414]">
+            <div class="flex justify-between mb-4">
+                <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Total Estimado</span>
+                <span class="text-white font-black" id="cart-total">S/ 0.00</span>
             </div>
-            <button class="w-full bg-white text-black font-black uppercase text-[10px] tracking-widest py-3 hover:bg-zinc-200 transition" onclick="checkoutWhatsApp()">
-                Completar Pedido por WhatsApp
-            </button>
+            <button onclick="checkoutWhatsApp()" class="w-full bg-white text-black py-4 text-[10px] font-black uppercase tracking-widest hover:bg-gray-200 transition-all">Enviar pedido a WhatsApp</button>
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 py-6">
-        <div id="home-view" class="space-y-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="relative h-[240px] md:h-[340px] bg-zinc-950 overflow-hidden cursor-pointer group" onclick="filterProducts('STRAPS')">
-                    <img src="images/bannerstraps.webp" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-700" alt="Straps">
-                    <div class="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
-                        <span class="text-[9px] font-black tracking-widest text-zinc-400 uppercase mb-1">Colección Premium</span>
-                        <h2 class="font-title text-xl md:text-2xl text-white tracking-tighter leading-none">STRAPS PARA CAMARAS</h2>
-                    </div>
-                </div>
-                <div class="relative h-[240px] md:h-[340px] bg-zinc-950 overflow-hidden cursor-pointer group" onclick="filterProducts('DOPP KITS')">
-                    <img src="images/bannerdopps.webp" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-700" alt="Dopp Kits">
-                    <div class="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
-                        <span class="text-[9px] font-black tracking-widest text-zinc-400 uppercase mb-1">Organización de viaje</span>
-                        <h2 class="font-title text-xl md:text-2xl text-white tracking-tighter leading-none">DOPP KITS / NECESER</h2>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="feed-container" class="space-y-12"></div>
+    <div id="main-content" class="container mx-auto px-4 py-6">
+        <div class="mb-10 text-center md:text-left">
+            <h2 id="view-title" class="titulo-destacado text-[20px] md:text-[28px] text-white uppercase">
+                ARTICULOS BRAVAZOS CON LOS MEJORES MATERIALES HECHOS EN PERÚ
+            </h2>
+            <div class="h-[1px] w-12 bg-white/20 mt-4 mx-auto md:mx-0"></div>
         </div>
 
-        <div id="catalog-view" class="hidden">
-            <div class="flex items-center justify-between mb-6 border-b border-zinc-900 pb-4">
-                <h2 id="catalog-title" class="font-title text-sm tracking-wider text-zinc-400">Catálogo</h2>
-                <button onclick="filterProducts('all')" class="text-[10px] font-black uppercase text-zinc-500 hover:text-white transition">Ver Todo</button>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div id="category-panel" class="hidden md:block md:col-span-2">
+                <h3 class="text-[9px] font-black text-white/30 uppercase tracking-[0.3em] mb-4">Filtrar</h3>
+                <div class="category-list">
+                    <button onclick="filterProducts('TODOS')" class="category-btn" id="btn-TODOS">INICIO</button>
+                    <button onclick="filterProducts('BILLETERAS')" class="category-btn" id="btn-BILLETERAS">BILLETERAS</button>
+                    <button onclick="filterProducts('ACCESORIOS')" class="category-btn" id="btn-ACCESORIOS">ACCESORIOS</button>
+                    <button onclick="filterProducts('BOLSOS')" class="category-btn" id="btn-BOLSOS">BOLSOS</button>
+                    <button onclick="filterProducts('CINTURONES')" class="category-btn" id="btn-CINTURONES">CINTURONES</button>
+                    <button onclick="filterProducts('LLAVEROS')" class="category-btn" id="btn-LLAVEROS">LLAVEROS</button>
+                    <button onclick="filterProducts('BEADS')" class="category-btn" id="btn-BEADS">BEADS</button>
+                    <button onclick="filterProducts('STAGE GEAR')" class="category-btn" id="btn-STAGE GEAR">STAGE GEAR</button>
+                </div>
             </div>
-            <div id="catalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-8"></div>
+            <main class="md:col-span-10" id="products-grid"></main>
         </div>
+    </div>
 
-        <div id="product-view" class="hidden max-w-4xl mx-auto pt-4">
+    <div id="single-product-view" class="hidden container mx-auto px-4 py-6 min-h-screen">
+        <button onclick="goHome()" class="mb-6 text-[10px] font-black uppercase tracking-widest text-gray-500 hover:text-white transition-colors">← Regresar al catálogo</button>
+        <div id="product-detail-content"></div>
+    </div>
+
+    <footer class="mt-20 border-t border-white/10 p-8 bg-[#0a0a0a]">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div class="text-[9px] font-bold text-gray-500 uppercase tracking-widest leading-loose">
+                REALIZAMOS ENVIOS GRATIS PARA TODO LIMA<br>
+                LOS ENVIOS A PROVINCIA SE ENVIARAN MEDIANTE SHALOM<br><br>
+                ENVIOS INTERNACIONALES PREVIA COORDINACION<br>
+                LIMA - PERÚ
             </div>
-    </main>
-
-    <footer class="border-t border-zinc-900 mt-20 py-8 px-4 text-center text-[10px] uppercase tracking-widest text-zinc-600 font-bold">
-        © 2026 1811 SUPPLY CO. Todos los derechos reservados. Hecho en Perú.
+            <div class="flex items-center gap-4">
+                <a href="https://www.instagram.com/1811supplyco/" target="_blank" class="hover:opacity-70 transition-opacity">
+                    <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849s-.011 3.585-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.849-.07c-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849s.012-3.584.07-4.849c.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.058-1.28.072-1.689.072-4.947s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.28-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+            </div>
+        </div>
     </footer>
 
     <script>
         const products = [
-            {
-                id: "strap-cam-01",
-                name: "Strap de Cámara Premium Camo",
-                cat: "STRAPS",
-                price: "85.00",
-                desc: "Diseñado para fotógrafos que buscan seguridad, resistencia y un estilo único. Fabricado con materiales de alta tracción y terminaciones reforzadas.",
-                variants: [
-                    { name: "Camo Original", dots: "#4B5320", imgs: ["images/camostrap1.webp", "images/camostrap2.webp", "images/camostrap3.webp"] },
-                    { name: "Negro Táctico", dots: "#111111", imgs: ["images/strapnegro1.webp", "images/strapnegro2.webp", "images/strapnegro3.webp", "images/strapnegro4.webp"] }
-                ]
-            },
-            {
-                id: "dopp-kit-01",
-                name: "Dopp Kit Viajero Impermeable",
-                cat: "DOPP KITS",
-                price: "120.00",
-                desc: "Tu compañero ideal de ruta. Espacio optimizado para tus artículos de aseo personal con forro impermeable fácil de limpiar y cierre de alta resistencia.",
-                variants: [
-                    { name: "Camo Black", dots: "#2d302e", imgs: ["images/camodoppkit.webp", "images/camodoppkit2.webp", "images/camodoppkit3.webp"] },
-                    { name: "Verde Oliva", dots: "#3b443b", imgs: ["images/olivadoppkit.webp", "images/olivadoppkit2.webp"] }
-                ]
-            },
-            {
-                id: "billetera-01",
-                name: "Billetera Minimalista Slim",
-                cat: "BILLETERAS",
-                price: "65.00",
-                desc: "Cero bulto, máxima eficiencia. Espacio para billetes desplegados y las tarjetas esenciales que usas el día a día. Cuero genuino estructurado de alta duración.",
-                variants: [
-                    { name: "Marrón Rústico", dots: "#5C4033", imgs: ["images/billeteramarron1.webp", "images/billeteramarron2.webp"] },
-                    { name: "Negro Mate", dots: "#1A1A1A", imgs: ["images/billeteranegra1.webp"] }
-                ]
-            },
-            {
-                id: "tarjetero-01",
-                name: "Tarjetero de Acceso Rápido",
-                cat: "TARJETEROS",
-                price: "45.00",
-                desc: "Diseño ultra delgado para llevar en el bolsillo delantero sin notar que está ahí. Capacidad de hasta 6 tarjetas y compartimento central oculto.",
-                variants: [
-                    { name: "Negro Carbón", dots: "#222222", imgs: ["images/tarjeteronegro1.webp", "images/tarjeteronegro2.webp"] }
-                ]
-            },
-            {
-                id: "portapasaporte-01",
-                name: "Portapasaporte Documentero",
-                cat: "PORTAPASAPORTES",
-                price: "95.00",
-                desc: "Protege tu pasaporte y mantén organizados tus pases de abordar, tarjetas de viajero frecuente y efectivo en un solo lugar seguro.",
-                variants: [
-                    { name: "Camo Foliage", dots: "#556B2F", imgs: ["images/pasaportecamo1.webp", "images/pasaportecamo2.webp"] }
-                ]
-            },
-            {
-                id: "llavero-01",
-                name: "Llavero Loop de Alta Resistencia",
-                cat: "LLAVEROS",
-                price: "35.00",
-                desc: "Mosquetón de grado militar y cinta reforzada para llevar tus llaves seguras en el cinturón o la mochila con un desenganche rápido.",
-                variants: [
-                    { name: "Negro Total", dots: "#000000", imgs: ["images/llaveronegro1.webp"] },
-                    { name: "Verde Militar", dots: "#485043", imgs: ["images/llaveroverde1.webp"] }
-                ]
-            }
+            { id: 1, cat: "BOLSOS", name: "UTILITY DOPP KIT DISTRESSED CHOCOLATE", desc: "NECESER TODO TERRENO CON AMPLIO ESPACIO, BOLSILLO CON CIERRE, BOLSILLOS LATERALES Y HANDLE DE DOBLE AGARRE, PERFECTO PARA TUS ARTÍCULOS DE USO DIARIO (ASEO, TECH, ETC.)<br><br>MEDIDAS: 16 cm X 25 cm APROX (SIN CONTAR EL HANDLE)<br><br>MATERIALES: CUERO DE RES FULL GRAIN, CANVAS DE ALTO GRAMAJE, CORDURA NYLON, ACERO INOXIDABLE Y LATÓN", price: 179, imgs: ["images/DOPPKITmarron.webp", "images/detalleDOPPKIT.webp", "images/detalleDOPPKIT2.webp"], variants: [] },
+            { id: 15, cat: "BOLSOS", name: "UTILITY DOPP KIT CAMO", desc: "NECESER TODO TERRENO CON AMPLIO ESPACIO, BOLSILLO CON CIERRE, BOLSILLOS LATERALES Y HANDLE DE DOBLE AGARRE, PERFECTO PARA TUS ARTÍCULOS DE USO DIARIO (ASEO, TECH, ETC.)<br><br>MEDIDAS: 16 cm X 25 cm APROX (SIN CONTAR EL HANDLE)<br><br>MATERIALES: CUERO DE RES FULL GRAIN, CORDURA NYLON, ACERO INOXIDABLE Y LATÓN", price: 179, imgs: ["images/camodoppkit.webp", "images/camodoppkit2.webp", "images/camodoppkit1.webp"], variants: [] },
+            { id: 21, cat: "BILLETERAS", name: "ZIPPERED WALLET", desc: "BILLETERA MINIMALISTA DE DISEÑO JAPONES PARA TARJETAS, BILLETES Y MONEDAS.<br><br>MEDIDAS: 9.5 CM X 11 CM APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE LATÓN MACIZO", price: 89, imgs: ["images/ZIPPERED.webp", "images/ZIPPEREDdetalle.webp"], variants: [] },
+            { id: 3, cat: "BILLETERAS", name: "GANADERO WALLET", desc: "BIFOLD HÍBRIDA CON ESPACIO PARA TARJETAS, BILLETES Y 4 ESPACIOS PEQUEÑOS PARA MINI HERRAMIENTAS DE VICTORINOX (LAPICERO, MONDADIENTES, PINZAS, ETC.)<br><br>MEDIDAS: 10.5 CM X 9 CM APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y TELA CORDURA", price: 109, varPhotos: { "CHOCOLATE": ["images/GANADERO.webp", "images/GANADEROabierto.webp", "images/GANADEROdetalle.webp"], "NEGRO": ["images/GANADEROnegro.webp", "images/GANADEROnegroabierto.webp", "images/GANADEROdetallenegro.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
+            { id: 4, cat: "BILLETERAS", name: "DÍDAC WALLET", desc: "TARJETERO MINIMALISTA PERFECTO PARA USO DIARIO PUEDES LLEWAR TARJETAS Y BILLETES.<br><br>MEDIDAS: 6.7 cm X 10.5 cm APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE LATON / ACERO INOXIDABLE", price: 129, varPhotos: { "CHOCOLATE": ["images/didac.webp", "images/DIDACatras.webp"], "NEGRO": ["images/DIDACnegro.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
+            { id: 5, cat: "ACCESORIOS", name: "MULTITOOL CARD + FUNDA DE CUERO", desc: "TARJETA MULTIHERRAMIENTA CON 10 FUNCIONES:<br>• ABRE LATAS<br>• ABRE CAJAS<br>• DESTORNILLADOR PLANO<br>• REGLA 4 CM<br>• ABRE BOTELLAS<br>• LLAVE INGLESA 6 MEDIDAS<br>• LLAVE MARIPOSA<br>• SIERRA<br>• ORIFICIO PARA LANYARD<br>• INDICADOR AUXILIAR DE DIRECCIÓN<br><br>MATERIAL: ACERO INOXIDABLE", price: 89, varPhotos: { "CHOCOLATE": ["images/MULTITOOL.webp", "images/MULTITOOLfunda.webp"], "NEGRO": ["images/MULTITOOL.webp", "images/MULTITOOLfundanegra.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
+            { id: 6, cat: "ACCESORIOS", name: "UTILITY TRAY", desc: "BANDEJA PARA COLOCAR OBJETOS DE BOLSILLO PERFECTO PARA TU CASA U OFICINA.<br><br>MATERIALES: CUERO DE RES FULL GRAIN, HERRAJE DE ACERO INOXIDABLE Y TELA TWEED", price: 99, varPhotos: { "SMALL": ["images/BANDEJAS.webp"], "MEDIUM": ["images/BANDEJAM.webp"], "LARGE": ["images/BANDEJAL.webp"] }, varPrices: { "SMALL": 99, "MEDIUM": 129, "LARGE": 159 }, varDesc: { "SMALL": "MEDIDAS: 14 cm X 14 cm APROX.", "MEDIUM": "MEDIDAS: 20 cm X 20 cm APROX.", "LARGE": "MEDIDAS: 20 cm X 30 cm APROX." }, variants: ["SMALL", "MEDIUM", "LARGE"], selected: "SMALL" },
+            { id: 7, cat: "ACCESORIOS", name: "PORTALENTES", desc: "FUNDA PARA LENTES CON INTERIOR ANTIRRAYONES Y OJAL PARA ENGANCHE.<br><br>MEDIDAS: 18 cm X 7.5 cm APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN, HERRAJE DE LATÓN Y ACERO INOXIDABLE", price: 99, imgs: ["images/PORTALENTES.webp", "images/PORTALENTESatras.webp"], variants: [] },
+            { id: 8, cat: "CINTURONES", name: "MIGHTY BELT + BLACK BUCKLE", desc: "CORREA TODO TERRENO DE PERFIL CASUAL PERFECTA PARA TODAS TUS AVENTURAS.<br><br>MEDIDAS: 4 cm DE ANCHO X LARGO PERSONALIZABLE.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE ACERO INOXIDABLE PAVONADO EN NEGRO", price: 149, imgs: ["images/MIGHTY.webp", "images/MIGHTYcompleta.webp"], variants: [] },
+            { id: 20, cat: "CINTURONES", name: "MIGHTY BELT BLACKOUT", desc: "CORREA TODO TERRENO DE PERFIL CASUAL PERFECTA PARA TODAS TUS AVENTURAS.<br><br>MEDIDAS: 4 cm DE ANCHO X LARGO PERSONALIZABLE.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE ACERO INOXIDABLE PAVONADO EN NEGRO", price: 149, imgs: ["images/blackout1.webp", "images/blackout.webp"], variants: [] },
+            { id: 9, cat: "LLAVEROS", name: "EL GANCHO", desc: "LLAVERO CON MOSQUETÓN DE PERFIL TÁCTICO.<br><br>MEDIDAS: 13.5 cm X 3 cm APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN AND HERRAJE DE ACERO INOXIDABLE", price: 79, varPhotos: { "CHOCOLATE": ["images/GANCHO.webp"], "NEGRO": ["images/GANCHOnegro.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
+            { id: 10, cat: "BEADS", name: "SKULL BEAD", desc: "CUENTA DECORATIVA.<br><br>MATERIAL: LATÓN MACIZO", price: 89, imgs: ["images/SKULLBEAD.webp"], variants: [] },
+            { id: 11, cat: "BEADS", name: "BABY DEVIL BEAD", desc: "CUENTA DECORATIVA.<br><br>MATERIAL: LATÓN MACIZO", price: 99, imgs: ["images/BABYDEVIL.webp"], variants: [] },
+            { id: 12, cat: "ACCESORIOS", name: "COASTERS", desc: "SET DE POSAVASOS DE CUERO DE PERFIL RÚSTICO INDISPENSABLES PARA TU CRISTALERIA / TAZAS Y BUENAZO PARA TUS REUNIONES.<br><br>MEDIDAS: 11 cm (DIAMETRO)<br><br>MATERIALES: CUERO DE RES FULL GRAIN", price: 89, varPhotos: { "JUEGO DE 4": ["images/COASTERS.webp", "images/COASTERsola.webp"], "JUEGO DE 6": ["images/COASTERS.webp", "images/COASTERsola.webp"] }, varPrices: { "JUEGO DE 4": 89, "JUEGO DE 6": 119 }, variants: ["JUEGO DE 4", "JUEGO DE 6"], selected: "JUEGO DE 4" },
+            { id: 16, cat: "LLAVEROS", name: "CARAVINER U", desc: "MOSQUETÓN/LLAVERO QUE SE PUEDE MONTAR EN LA CORREA.<br><br>MEDIDAS: MEDIDAS: 3.5 CM X 7.5 CM APROX.<br>MATERIAL: LATÓN MACIZO", price: 79, imgs: ["images/caraviner.webp","images/caraviner2.webp"], variants: [] },
+            { id: 17, cat: "BEADS", name: "MODELO 01 BEAD", desc: "CUENTA DECORATIVA.<br><br>MATERIAL: LATÓN MACIZO", price: 89, imgs: ["images/01bead.webp"], variants: [] },
+            { id: 13, cat: "BILLETERAS", name: "MINI TRUCKER WALLET", desc: "BILLETERA DE CAMIONERO CON AMPLIO ESPACIO PARA MONEDAS, ESPACIO PARA BILLETES (DOBLADOS) Y ESPACIO EN EL MEDIO PARA TARJETAS, CUENTA CON OJAL PARA ENGANCHAR CADENA.<br><br>MATERIALES: CUERO DE RES FULL GRAIN, LATON y ACERO INOXIDABLE<br>MEDIDAS: 14 CM x 9.5 CM", price: 129, varPhotos: { "SIN CADENA": ["images/trucker1.webp", "images/trucker2.webp"], "CON CADENA": ["images/trucker3.webp"] }, varPrices: { "SIN CADENA": 129, "CON CADENA": 159}, variants: ["SIN CADENA", "CON CADENA"], selected: "SIN CADENA" },
+            { id: 14, cat: "BEADS", name: "HORNED SKULL BEAD", desc: "CUENTA DECORATIVA.<br><br>MATERIAL: LATÓN MACIZO", price: 59, imgs: ["images/hornbead.webp"], variants: [] },
+            { id: 18, cat: "STAGE GEAR", name: "STRAP STAGEMAN", desc: "STRAP PARA INSTRUMENTOS (GUITARRAS, BAJOS, ETC.) DE CONSTRUCCIÓN ROBUSTA Y PERFIL VINTAGE<br><br>MEDIDAS: 5 CM X 140  CM APROX.<br><br>MATERIALES: JAQUARD, NYLON, CUERO DE RES FULL GRAIN Y LATÓN MACIZO", price: 159, 
+             varPhotos: { "MONASTERY": ["images/strapmonastery.webp", "images/strapmonastery1.webp", "images/strapmonastery2.webp", "images/strapmonastery3.webp", "images/strapmonastery4.webp"], 
+                          "SHARP DIAMOND": ["images/strapninja.webp", "images/strapninja1.webp", "images/strapninja2.webp", "images/strapninja3.webp", "images/strapninja4.webp"], 
+                          "RED CROSSES": ["images/straprojo.webp", "images/straprojo1.webp", "images/straprojo2.webp", "images/straprojo3.webp", "images/straprojo4.webp"]
+                        }, variants: ["MONASTERY", "SHARP DIAMOND", "RED CROSSES"], selected: "SHARP DIAMOND" },
+            { id: 19, cat: "STAGE GEAR", name: "STRAP STAGEMAN COTTON", desc: "STRAP PARA INSTRUMENTOS (GUITARRAS, BAJOS, ETC.) DE CONSTRUCCIÓN ROBUSTA Y PERFIL VINTAGE<br><br>MEDIDAS: 5 CM X 140  CM APROX.<br><br>MATERIALES: REATA DE ALGODÓN, CUERO DE RES FULL GRAIN Y LATÓN MACIZO", price: 159, 
+             varPhotos: { "LADRILLO": ["images/strapnaranja.webp", "images/strapnaranja1.webp", "images/strapnaranja2.webp", "images/strapnaranja3.webp", "images/strapnaranja4.webp"], 
+                          "NEGRO": ["images/strapnegro.webp", "images/strapnegro1.webp","images/strapnegro2.webp", "images/strapnegro3.webp", "images/strapnegro4.webp"] 
+                        }, variants: ["LADRILLO", "NEGRO"], selected: "LADRILLO" },
+            { id: 2, cat: "BOLSOS", name: "UTILITY BRIEFCASE CAMO", desc: "MALETÍN DE TRABAJO DE AMPLIO ESPACIO.<br>AL EXTERIOR:<br>-BOLSILLO FRONTAL<br>-HANDLES UTILITARIOS (PARA LLEVAR PORTAPLANOS, CHAQUETA, PERIÓDICOS, ETC.)<br>AL INTERIOR:<br>-COMPARTIMENTO ANTI RAYONES PARA LAPTOP,<br>-BOLSILLO CON CIERRE<br>-DOS BOLSILLOS PARA CABLEADO U OTROS ACCESORIOS.<br><br>MATERIAL: CUERO DE RES FULL GRAIN, TELA CORDURA, ACERO INOXIDABLE, TELA SUEDE", price: 579, imgs: ["images/briefcase1.webp", "images/briefcase2.webp", "images/briefcase3.webp", "images/briefcase4.webp", "images/briefcase5.webp", "images/briefcase6.webp"], variants: [] },
+            { id: 22, cat: "BOLSOS", name: "UTILITY BRIEFCASE DISTRESSED CHOCOLATE", desc: "MALETÍN DE TRABAJO DE AMPLIO ESPACIO.<br>AL EXTERIOR:<br>-BOLSILLO FRONTAL<br>-HANDLES UTILITARIOS (PARA LLEVAR PORTAPLANOS, CHAQUETA, PERIÓDICOS, ETC.)<br>AL INTERIOR:<br>-COMPARTIMENTO ANTI RAYONES PARA LAPTOP,<br>-BOLSILLO CON CIERRE<br>-DOS BOLSILLOS PARA CABLEADO U OTROS ACCESORIOS.<br><br>MATERIAL: CUERO DE RES FULL GRAIN, CANVAS DE ALTO GRAMAJE, TELA CORDURA, ACERO INOXIDABLE, TELA SUEDE", price: 579, imgs: ["images/briefcasechoco1.webp", "images/briefcasechoco2.webp", "images/briefcasechoco3.webp", "images/briefcasechoco4.webp", "images/briefcasechoco5.webp", "images/briefcasechoco6.webp"], variants: [] }
+
+
         ];
 
-        // ==========================================
-        // CONFIGURACIÓN DE CAMPAÑA DE DESCUENTO
-        // ==========================================
-        const ACTIVAR_DESCUENTO = true; // Cambia a true para activar el 15%, o a false para apagarlo
-        const PORCENTAJE_DESCUENTO = 0.15; // 0.15 representa el 15% de descuento
-
-        let cart = [];
-
-        // Función auxiliar para obtener el precio correcto del producto evaluando la promoción
-        function getProductPrice(basePrice) {
-            const originalPrice = Number(basePrice);
-            if (ACTIVAR_DESCUENTO) {
-                const finalPrice = originalPrice * (1 - PORCENTAJE_DESCUENTO);
-                return {
-                    original: originalPrice.toFixed(2),
-                    final: finalPrice,
-                    isPromo: true
-                };
-            }
-            return {
-                original: originalPrice.toFixed(2),
-                final: originalPrice,
-                isPromo: false
-            };
-        }
+        let cart = JSON.parse(localStorage.getItem('cart_1811')) || [];
+        let currentImgIdx = {};
 
         function init() {
-            renderHomeWithBanners();
-            updateCartUI();
+            updateCartUI(); 
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id');
+            const cat = params.get('cat');
+
+            if (productId) {
+                showSingleProduct(parseInt(productId));
+            } else if (cat && cat !== 'TODOS') {
+                render(cat);
+            } else {
+                renderHomeWithBanners();
+            }
         }
 
         function renderHomeWithBanners() {
-            const container = document.getElementById('feed-container');
-            container.innerHTML = '';
+            document.getElementById('body-tag').classList.remove('product-open');
+            document.getElementById('main-content').classList.remove('hidden');
+            document.getElementById('single-product-view').classList.add('hidden');
+            document.getElementById('view-title').innerHTML = "ARTICULOS BRAVAZOS CON LOS MEJORES MATERIALES HECHOS EN PERÚ";
             
-            const categories = ["STRAPS", "DOPP KITS", "BILLETERAS", "TARJETEROS", "PORTAPASAPORTES", "LLAVEROS"];
-            
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-TODOS').classList.add('active');
+
+            const grid = document.getElementById('products-grid');
+            grid.className = "md:col-span-10 flex flex-col"; 
+            grid.innerHTML = '';
+
+            const categories = [...new Set(products.map(p => p.cat))];
+
             categories.forEach(cat => {
                 const catProducts = products.filter(p => p.cat === cat);
                 if(catProducts.length === 0) return;
-                
-                let sectionHTML = `
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between border-b border-zinc-900 pb-2">
-                            <h3 class="font-title text-xs tracking-widest text-zinc-400">${cat}</h3>
-                            <button onclick="filterProducts('${cat}')" class="text-[9px] font-black uppercase text-zinc-500 hover:text-white transition">Ver Todo</button>
-                        </div>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-8">
-                `;
-                
-                catProducts.slice(0, 4).forEach(prod => {
-                    const priceInfo = getProductPrice(prod.price);
-                    let priceHTML = ``;
-                    if (priceInfo.isPromo) {
-                        priceHTML = `
-                            <span class="text-zinc-500 line-through mr-1">S/ ${priceInfo.original}</span>
-                            <span class="text-red-500 font-black">S/ ${priceInfo.final.toFixed(2)}</span>
-                        `;
-                    } else {
-                        priceHTML = `<span class="text-white">S/ ${priceInfo.original}</span>`;
-                    }
 
-                    sectionHTML += `
-                        <div class="cursor-pointer group flex flex-col" onclick="viewProduct('${prod.id}')">
-                            <div class="relative w-full aspect-square bg-zinc-950 overflow-hidden mb-3">
-                                <img src="${prod.variants[0].imgs[0]}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="${prod.name}">
+                const section = document.createElement('div');
+                section.className = "category-banner";
+          
+                section.innerHTML = `
+                    <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-2">
+                        <h2 class="text-[10px] font-black tracking-widest text-white uppercase">${cat}</h2>
+                        <button onclick="filterProducts('${cat}')" class="text-[9px] text-gray-500 font-bold uppercase hover:text-white">Ver Todo →</button>
+                    </div>
+                    <div class="category-slider no-scrollbar">
+                        ${catProducts.map(p => `
+                            <div class="min-w-[160px] md:min-w-[220px] cursor-pointer group" onclick="window.location.href='?id=${p.id}'">
+                                <div class="relative w-full aspect-square bg-black mb-2 overflow-hidden rounded-sm">
+                                    <img src="${p.imgs ? p.imgs[0] : p.varPhotos[p.selected][0]}" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <h4 class="text-[8px] md:text-[9px] font-black text-white uppercase truncate">${p.name}</h4>
+                                <p class="text-[8px] text-gray-400 font-bold">S/ ${Number(p.price).toFixed(2)}</p>
                             </div>
-                            <h4 class="text-[11px] font-black uppercase tracking-tight text-zinc-300 group-hover:text-white transition line-clamp-1">${prod.name}</h4>
-                            <p class="text-[10px] font-bold text-zinc-500 mt-0.5 uppercase tracking-tighter">${prod.variants.length} Variante(s)</p>
-                            <p class="text-[11px] mt-1 uppercase font-black">${priceHTML}</p>
-                        </div>
-                    `;
-                });
-                
-                sectionHTML += `</div></div>`;
-                container.innerHTML += sectionHTML;
-            });
-        }
-
-        function filterProducts(category) {
-            const homeView = document.getElementById('home-view');
-            const catalogView = document.getElementById('catalog-view');
-            const productView = document.getElementById('product-view');
-            const title = document.getElementById('catalog-title');
-            const grid = document.getElementById('catalog-grid');
-            
-            productView.classList.add('hidden');
-            
-            if(category === 'all' || category === '') {
-                homeView.classList.remove('hidden');
-                catalogView.classList.add('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                return;
-            }
-            
-            homeView.classList.add('hidden');
-            catalogView.classList.remove('hidden');
-            title.innerText = category;
-            grid.innerHTML = '';
-            
-            const filtered = products.filter(p => p.cat === category);
-            
-            filtered.forEach(prod => {
-                const priceInfo = getProductPrice(prod.price);
-                let priceHTML = ``;
-                if (priceInfo.isPromo) {
-                    priceHTML = `
-                        <span class="text-zinc-500 line-through mr-1">S/ ${priceInfo.original}</span>
-                        <span class="text-red-500 font-black">S/ ${priceInfo.final.toFixed(2)}</span>
-                    `;
-                } else {
-                    priceHTML = `<span class="text-white">S/ ${priceInfo.original}</span>`;
-                }
-
-                grid.innerHTML += `
-                    <div class="cursor-pointer group flex flex-col" onclick="viewProduct('${prod.id}')">
-                        <div class="relative w-full aspect-square bg-zinc-950 overflow-hidden mb-3">
-                            <img src="${prod.variants[0].imgs[0]}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="${prod.name}">
-                        </div>
-                        <h4 class="text-[11px] font-black uppercase tracking-tight text-zinc-300 group-hover:text-white transition line-clamp-1">${prod.name}</h4>
-                        <p class="text-[10px] font-bold text-zinc-500 mt-0.5 uppercase tracking-tighter">${prod.variants.length} Variante(s)</p>
-                        <p class="text-[11px] mt-1 uppercase font-black">${priceHTML}</p>
+                        `).join('')}
                     </div>
                 `;
+                grid.appendChild(section);
             });
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function viewProduct(id) {
-            const prod = products.find(p => p.id === id);
-            if(!prod) return;
+        function render(filter = 'TODOS') {
+            document.getElementById('body-tag').classList.remove('product-open');
+            document.getElementById('main-content').classList.remove('hidden');
+            document.getElementById('single-product-view').classList.add('hidden');
+            document.getElementById('category-panel-mobile').classList.remove('active');
+  
+            document.getElementById('view-title').innerText = filter;
             
-            document.getElementById('home-view').classList.add('hidden');
-            document.getElementById('catalog-view').classList.add('hidden');
-            
-            const view = document.getElementById('product-view');
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById(`btn-${filter}`);
+            if(activeBtn) activeBtn.classList.add('active');
+
+            const grid = document.getElementById('products-grid');
+            grid.className = "md:col-span-10 grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6";
+            grid.innerHTML = '';
+
+            const filtered = products.filter(p => p.cat === filter);
+            filtered.forEach(p => {
+                let gallery = (p.varPhotos && p.varPhotos[p.selected]) ? p.varPhotos[p.selected] : p.imgs;
+                let displayPrice = p.varPrices ? p.varPrices[p.selected] : p.price;
+                const div = document.createElement('div');
+                div.className = "product-card p-2 md:p-4";
+   
+                div.innerHTML = `
+                    <div class="relative w-full aspect-square mb-2 md:mb-4 overflow-hidden cursor-pointer bg-black rounded-sm" onclick="window.location.href='?id=${p.id}'">
+                        <img src="${gallery[0]}" class="absolute inset-0 w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="flex flex-col flex-1">
+                        <div class="flex flex-col mb-2">
+                            <h3 class="font-bold text-[8px] md:text-[10px] text-white tracking-widest uppercase mb-1">${p.name}</h3>
+                            <span class="text-[9px] md:text-[10px] text-gray-400 font-bold">S/ ${Number(displayPrice).toFixed(2)}</span>
+                        </div>
+                        <div class="mt-auto flex flex-col gap-2">
+                            <button onclick="addToCart(${p.id})" class="w-full bg-white text-black py-2 md:py-3 text-[8px] md:text-[9px] font-black uppercase tracking-widest hover:bg-gray-200 transition-all">Añadir</button>
+                        </div>
+                    </div>`;
+                grid.appendChild(div);
+            });
+        }
+
+        function filterProducts(cat) { window.location.href = `index.html?cat=${cat}`; }
+
+        function showSingleProduct(id) {
+            document.getElementById('body-tag').classList.add('product-open');
+            document.getElementById('main-content').classList.add('hidden');
+            document.getElementById('category-panel-mobile').classList.remove('active');
+            const view = document.getElementById('single-product-view');
+            const container = document.getElementById('product-detail-content');
             view.classList.remove('hidden');
             
-            const priceInfo = getProductPrice(prod.price);
-            let priceHTML = ``;
-            if (priceInfo.isPromo) {
-                priceHTML = `
-                    <span class="text-zinc-500 line-through mr-2">S/ ${priceInfo.original}</span>
-                    <span class="text-red-500 font-black">S/ ${priceInfo.final.toFixed(2)}</span>
-                `;
-            } else {
-                priceHTML = `<span class="text-white">S/ ${priceInfo.original}</span>`;
-            }
-            
-            let variantDots = '';
-            prod.variants.forEach((v, idx) => {
-                variantDots += `<div class="variant-dot ${idx===0?'active':''}" style="background-color: ${v.dots};" onclick="changeVariant(${idx})" title="${v.name}"></div>`;
-            });
+            const p = products.find(prod => prod.id === id);
+            if(!p) return;
 
-            view.innerHTML = `
-                <button class="text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-white transition mb-6 flex items-center gap-1" onclick="goHome()">
-                    ← Regresar al catálogo
-                </button>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                    <div class="space-y-3">
-                        <div class="relative w-full aspect-square bg-zinc-950 overflow-hidden">
-                            <img id="main-product-img" src="${prod.variants[0].imgs[0]}" class="absolute inset-0 w-full h-full object-cover" alt="${prod.name}">
+            if (currentImgIdx[p.id] === undefined) currentImgIdx[p.id] = 0;
+            let gallery = (p.varPhotos && p.varPhotos[p.selected]) ? p.varPhotos[p.selected] : p.imgs;
+            let price = p.varPrices ? p.varPrices[p.selected] : p.price;
+            let extraDesc = p.varDesc ? `<br>${p.varDesc[p.selected]}` : '';
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                    <div class="relative aspect-square bg-black overflow-hidden rounded-sm group">
+                        <div class="carousel-container" id="carousel-${p.id}" onscroll="updateDotsOnScroll(${p.id})">
+                            ${gallery.map((img, i) => `
+                                <div class="carousel-item">
+                                    <img src="${img}" class="w-full h-full object-cover">
+                                </div>
+                            `).join('')}
                         </div>
-                        <div id="thumb-container" class="flex gap-2 overflow-x-auto no-scrollbar">
-                            ${prod.variants[0].imgs.map(img => `<img src="${img}" class="w-16 h-16 object-cover bg-zinc-950 cursor-pointer border border-zinc-900 hover:border-zinc-700" onclick="document.getElementById('main-product-img').src='${img}'">`).join('')}
+
+                        ${gallery.length > 1 ? `
+                        <div class="nav-area left-area" onclick="changeImg(${p.id}, -1)">
+                            <div class="nav-arrow-mini">❮</div>
                         </div>
+                        <div class="nav-area right-area" onclick="changeImg(${p.id}, 1)">
+                            <div class="nav-arrow-mini">❯</div>
+                        </div>
+                        
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-[70] pointer-events-none">
+                            ${gallery.map((_, i) => `
+                                <div id="dot-${p.id}-${i}" class="w-1.5 h-1.5 rounded-full transition-all ${i === currentImgIdx[p.id] ? 'bg-white scale-110' : 'bg-white/30'}"></div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
                     </div>
-                    <div class="space-y-6">
-                        <div>
-                            <span class="text-[9px] font-black tracking-widest text-zinc-500 uppercase">${prod.cat}</span>
-                            <h1 class="font-title text-xl md:text-2xl mt-1 tracking-tight">${prod.name}</h1>
-                            <p id="product-view-price" class="text-lg uppercase font-black mt-2">${priceHTML}</p>
+
+                    <div class="flex flex-col justify-center">
+                        <span class="text-[9px] text-white/40 font-black tracking-[0.3em] uppercase mb-2">${p.cat}</span>
+                        <h1 class="text-2xl md:text-4xl font-black text-white uppercase tracking-tighter mb-2 leading-none">${p.name}</h1>
+                        <p class="text-xl md:text-2xl text-white font-bold mb-6">S/ ${Number(price).toFixed(2)}</p>
+                        <div class="text-[11px] leading-relaxed text-gray-400 uppercase font-bold mb-8 border-l border-white/20 pl-4">
+                            ${p.desc}
+                            ${extraDesc}
                         </div>
-                        <div class="border-t border-zinc-900 pt-4">
-                            <span class="text-[9px] font-black tracking-widest text-zinc-400 uppercase block mb-2">Variante: <span id="variant-name" class="text-white">${prod.variants[0].name}</span></span>
-                            <div class="flex items-center gap-3">${variantDots}</div>
+                        <div class="flex flex-wrap gap-2 mb-10">
+                            ${p.variants.map(v => `<button onclick="setVar(${p.id}, '${v}')" class="variant-btn ${p.selected === v ? 'selected' : ''}">${v}</button>`).join('')}
                         </div>
-                        <div class="border-t border-zinc-900 pt-4">
-                            <p class="text-zinc-400 text-xs leading-relaxed font-medium">${prod.desc}</p>
-                        </div>
-                        <button class="w-full bg-white text-black font-black uppercase text-[10px] tracking-widest py-3.5 hover:bg-zinc-200 transition" onclick="addToCart('${prod.id}')">
-                            Agregar al Carrito
-                        </button>
+                        <button onclick="addToCart(${p.id})" class="w-full bg-white text-black py-5 text-[11px] font-black uppercase tracking-[0.2em] active:scale-95 transition-all">Añadir al Carrito</button>
                     </div>
-                </div>
-            `;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+                </div>`;
+ 
+            // Posicionar el scroll en la imagen guardada
+            setTimeout(() => {
+                const carousel = document.getElementById(`carousel-${p.id}`);
+                if(carousel) carousel.scrollLeft = carousel.clientWidth * currentImgIdx[p.id];
+            }, 10);
         }
 
-        let activeVariantIndex = 0;
-        function changeVariant(idx) {
-            const urlParams = new URLSearchParams(window.location.search);
-            const view = document.getElementById('product-view');
-            const dots = view.querySelectorAll('.variant-dot');
-            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        // Cambio manual por clic (PC)
+        function changeImg(id, step) {
+            const p = products.find(x => x.id === id);
+            let gallery = (p.varPhotos && p.varPhotos[p.selected]) ? p.varPhotos[p.selected] : p.imgs;
+            const carousel = document.getElementById(`carousel-${id}`);
             
-            // Re-render gallery logic based on product context
-            const activeHeader = view.querySelector('h1');
-            if(!activeHeader) return;
-            const prod = products.find(p => p.name === activeHeader.innerText);
-            if(!prod) return;
-            
-            activeVariantIndex = idx;
-            document.getElementById('variant-name').innerText = prod.variants[idx].name;
-            document.getElementById('main-product-img').src = prod.variants[idx].imgs[0];
-            
-            const thumbContainer = document.getElementById('thumb-container');
-            thumbContainer.innerHTML = prod.variants[idx].imgs.map(img => `<img src="${img}" class="w-16 h-16 object-cover bg-zinc-950 cursor-pointer border border-zinc-900 hover:border-zinc-700" onclick="document.getElementById('main-product-img').src='${img}'">`).join('');
+            currentImgIdx[id] = (currentImgIdx[id] + step + gallery.length) % gallery.length;
+            carousel.scrollTo({ left: carousel.clientWidth * currentImgIdx[id], behavior: 'smooth' });
+        }
+
+        // Sincronizar puntos al deslizar (Celular)
+        function updateDotsOnScroll(id) {
+            const carousel = document.getElementById(`carousel-${id}`);
+            const p = products.find(x => x.id === id);
+            let gallery = (p.varPhotos && p.varPhotos[p.selected]) ? p.varPhotos[p.selected] : p.imgs;
+            const newIdx = Math.round(carousel.scrollLeft / carousel.clientWidth);
+            if(newIdx !== currentImgIdx[id]) {
+                currentImgIdx[id] = newIdx;
+                gallery.forEach((_, i) => {
+                    const dot = document.getElementById(`dot-${id}-${i}`);
+                    if(dot) dot.className = `w-1.5 h-1.5 rounded-full transition-all ${i === newIdx ? 'bg-white scale-110' : 'bg-white/30'}`;
+                });
+            }
+        }
+
+        function setVar(id, v) {
+            const p = products.find(prod => prod.id === id);
+            p.selected = v;
+            currentImgIdx[id] = 0; // Reiniciar a la primera foto de la variante
+            showSingleProduct(id);
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+            document.getElementById('cart-overlay').classList.toggle('active');
         }
 
         function addToCart(id) {
-            const prod = products.find(p => p.id === id);
-            if(!prod) return;
-            
-            const variant = prod.variants[activeVariantIndex];
-            const priceInfo = getProductPrice(prod.price);
-            
-            cart.push({
-                id: prod.id,
-                name: prod.name,
-                currentVariant: variant.name,
-                currentPrice: priceInfo.final
-            });
-            
+            const p = products.find(prod => prod.id === id);
+            const price = p.varPrices ? p.varPrices[p.selected] : p.price;
+            cart.push({ ...p, currentPrice: price, currentVariant: p.selected });
+            localStorage.setItem('cart_1811', JSON.stringify(cart));
             updateCartUI();
-            toggleCart();
+            if(!document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
         }
 
         function removeFromCart(index) {
             cart.splice(index, 1);
+            localStorage.setItem('cart_1811', JSON.stringify(cart));
             updateCartUI();
         }
 
-        function toggleCart() { document.getElementById('cart-panel').classList.toggle('active'); }
-
         function updateCartUI() {
-            document.getElementById('cart-count').innerText = cart.length;
             const container = document.getElementById('cart-items');
+            const count = document.getElementById('cart-count');
             const total = document.getElementById('cart-total');
-            
-            if(cart.length === 0) {
-                container.innerHTML = `<p class="text-zinc-600 font-bold text-[10px] uppercase tracking-widest text-center py-8">Tu carrito está vacío.</p>`;
-                total.innerText = `S/ 0.00`;
-                return;
-            }
-            
+            count.innerText = cart.length;
             container.innerHTML = '';
             let sum = 0;
             cart.forEach((item, index) => {
                 sum += item.currentPrice;
+                let gallery = (item.varPhotos && item.varPhotos[item.currentVariant]) ? item.varPhotos[item.currentVariant] : item.imgs;
                 container.innerHTML += `
-                    <div class="flex items-center gap-3 border-b border-zinc-900 pb-3">
+                    <div class="flex gap-4 items-center border-b border-white/5 pb-4">
+                        <img src="${gallery[0]}" class="w-16 h-16 object-cover object-center bg-black rounded-sm">
                         <div class="flex-1 text-[9px] uppercase font-black">
                             <h4 class="text-white">${item.name}</h4>
                             <p class="text-gray-500">${item.currentVariant || ''}</p>
                             <p class="text-white mt-1">S/ ${Number(item.currentPrice).toFixed(2)}</p>
                         </div>
-                        <button class="text-red-500 text-xs" onclick=\"removeFromCart(${index})\">Eliminar</button>
+                        <button class="text-red-500 text-xs" onclick="removeFromCart(${index})">Eliminar</button>
                     </div>`;
             });
             total.innerText = `S/ ${sum.toFixed(2)}`;
@@ -500,9 +465,9 @@
 
         function toggleCategoriesMobile() { document.getElementById('category-panel-mobile').classList.toggle('active'); }
         function goHome() {
-            window.location.href = 'index.html';
-        }
-
+    window.location.href = 'index.html';
+}
+        // Ejecutar init al cargar la página
         window.onload = init;
     </script>
 </body>
