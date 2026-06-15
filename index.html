@@ -179,8 +179,8 @@
             { id: 5, cat: "ACCESORIOS", name: "MULTITOOL CARD + FUNDA DE CUERO", desc: "TARJETA MULTIHERRAMIENTA CON 10 FUNCIONES:<br>• ABRE LATAS<br>• ABRE CAJAS<br>• DESTORNILLADOR PLANO<br>• REGLA 4 CM<br>• ABRE BOTELLAS<br>• LLAVE INGLESA 6 MEDIDAS<br>• LLAVE MARIPOSA<br>• SIERRA<br>• ORIFICIO PARA LANYARD<br>• INDICADOR AUXILIAR DE DIRECCIÓN<br><br>MATERIAL: ACERO INOXIDABLE", price: 89, varPhotos: { "CHOCOLATE": ["images/MULTITOOL.webp", "images/MULTITOOLfunda.webp"], "NEGRO": ["images/MULTITOOL.webp", "images/MULTITOOLfundanegra.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
             { id: 6, cat: "ACCESORIOS", name: "UTILITY TRAY", desc: "BANDEJA PARA COLOCAR OBJETOS DE BOLSILLO PERFECTO PARA TU CASA U OFICINA.<br><br>MATERIALES: CUERO DE RES FULL GRAIN, HERRAJE DE ACERO INOXIDABLE Y TELA TWEED", price: 99, varPhotos: { "SMALL": ["images/BANDEJAS.webp"], "MEDIUM": ["images/BANDEJAM.webp"], "LARGE": ["images/BANDEJAL.webp"] }, varPrices: { "SMALL": 99, "MEDIUM": 129, "LARGE": 159 }, varDesc: { "SMALL": "MEDIDAS: 14 cm X 14 cm APROX.", "MEDIUM": "MEDIDAS: 20 cm X 20 cm APROX.", "LARGE": "MEDIDAS: 20 cm X 30 cm APROX." }, variants: ["SMALL", "MEDIUM", "LARGE"], selected: "SMALL" },
             { id: 7, cat: "ACCESORIOS", name: "PORTALENTES", desc: "FUNDA PARA LENTES CON INTERIOR ANTIRRAYONES Y OJAL PARA ENGANCHE.<br><br>MEDIDAS: 18 cm X 7.5 cm APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN, HERRAJE DE LATÓN Y ACERO INOXIDABLE", price: 99, imgs: ["images/PORTALENTES.webp", "images/PORTALENTESatras.webp"], variants: [] },
-            { id: 8, cat: "CINTURONES", name: "MIGHTY BELT + BLACK BUCKLE", desc: "CORREA TODO TERRENO DE PERFIL CASUAL PERFECTA PARA TODAS TUS AVENTURAS.<br><br>MEDIDAS: 4 cm DE ANCHO X LARGO PERSONALIZABLE.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE ACERO INOXIDABLE PAVONADO EN NEGRO", price: 149, imgs: ["images/MIGHTY.webp", "images/MIGHTYcompleta.webp"], variants: [],agotado: true },
-            { id: 20, cat: "CINTURONES", name: "MIGHTY BELT BLACKOUT", desc: "CORREA TODO TERRENO DE PERFIL CASUAL PERFECTA PARA TODAS TUS AVENTURAS.<br><br>MEDIDAS: 4 cm DE ANCHO X LARGO PERSONALIZABLE.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE ACERO INOXIDABLE PAVONADO EN NEGRO", price: 149, imgs: ["images/blackout1.webp", "images/blackout.webp"], variants: [], agotado: true},
+            { id: 8, cat: "CINTURONES", name: "MIGHTY BELT + BLACK BUCKLE", desc: "CORREA TODO TERRENO DE PERFIL CASUAL PERFECTA PARA TODAS TUS AVENTURAS.<br><br>MEDIDAS: 4 cm DE ANCHO X LARGO PERSONALIZABLE.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE ACERO INOXIDABLE PAVONADO EN NEGRO", price: 149, imgs: ["images/MIGHTY.webp", "images/MIGHTYcompleta.webp"], variants: [], agotado: true },
+            { id: 20, cat: "CINTURONES", name: "MIGHTY BELT BLACKOUT", desc: "CORREA TODO TERRENO DE PERFIL CASUAL PERFECTA PARA TODAS TUS AVENTURAS.<br><br>MEDIDAS: 4 cm DE ANCHO X LARGO PERSONALIZABLE.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE ACERO INOXIDABLE PAVONADO EN NEGRO", price: 149, imgs: ["images/blackout1.webp", "images/blackout.webp"], variants: [], agotado: true },
             { id: 9, cat: "LLAVEROS", name: "EL GANCHO", desc: "LLAVERO CON MOSQUETÓN DE PERFIL TÁCTICO.<br><br>MEDIDAS: 13.5 cm X 3 cm APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN AND HERRAJE DE ACERO INOXIDABLE", price: 79, varPhotos: { "CHOCOLATE": ["images/GANCHO.webp"], "NEGRO": ["images/GANCHOnegro.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
             { id: 10, cat: "BEADS", name: "SKULL BEAD", desc: "CUENTA DECORATIVA.<br><br>MATERIAL: LATÓN MACIZO", price: 89, imgs: ["images/SKULLBEAD.webp"], variants: [] },
             { id: 11, cat: "BEADS", name: "BABY DEVIL BEAD", desc: "CUENTA DECORATIVA.<br><br>MATERIAL: LATÓN MACIZO", price: 99, imgs: ["images/BABYDEVIL.webp"], variants: [] },
@@ -336,4 +336,195 @@
 
             if (currentImgIdx[p.id] === undefined) currentImgIdx[p.id] = 0;
             let gallery = (p.varPhotos && p.varPhotos[p.selected]) ? p.varPhotos[p.selected] : p.imgs;
-            let price =
+            let price = p.varPrices ? p.varPrices[p.selected] : p.price;
+            let extraDesc = p.varDesc ? `<br>${p.varDesc[p.selected]}` : '';
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                    <div class="relative aspect-square bg-black overflow-hidden rounded-sm group">
+                        <div class="carousel-container" id="carousel-${p.id}" onscroll="updateDotsOnScroll(${p.id})">
+                            ${gallery.map((img, i) => `
+                                <div class="carousel-item">
+                                    <img src="${img}" class="w-full h-full object-cover">
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        ${gallery.length > 1 ? `
+                        <div class="nav-area left-area" onclick="changeImg(${p.id}, -1)">
+                            <div class="nav-arrow-mini">❮</div>
+                        </div>
+                        <div class="nav-area right-area" onclick="changeImg(${p.id}, 1)">
+                            <div class="nav-arrow-mini">❯</div>
+                        </div>
+                        
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5 z-[70] pointer-events-none">
+                            ${gallery.map((_, i) => `
+                                <div id="dot-${p.id}-${i}" class="w-1.5 h-1.5 rounded-full transition-all ${i === currentImgIdx[p.id] ? 'bg-white scale-110' : 'bg-white/30'}"></div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="flex flex-col justify-center">
+                        <span class="text-[9px] text-white/40 font-black tracking-[0.3em] uppercase mb-2">${p.cat}</span>
+                        <h1 class="text-2xl md:text-4xl font-black text-white uppercase tracking-tighter mb-2 leading-none">${p.name}</h1>
+                        
+                        ${p.agotado
+                            ? `<p class="text-2xl md:text-3xl text-red-500 font-black mb-6">AGOTADO</p>`
+                            : (ACTIVAR_DESCUENTO
+                                ? `<div class="flex items-center gap-3 mb-6"><p class="text-lg md:text-xl text-gray-400 font-bold line-through">S/ ${Number(price).toFixed(2)}</p><p class="text-2xl md:text-3xl text-red-500 font-black">S/ ${(Number(price) * 0.85).toFixed(2)}</p></div>`
+                                : `<p class="text-xl md:text-2xl text-white font-bold mb-6">S/ ${Number(price).toFixed(2)}</p>`)
+                        }
+
+                        <div class="text-[11px] leading-relaxed text-gray-400 uppercase font-bold mb-8 border-l border-white/20 pl-4">
+                            ${p.desc}
+                            ${extraDesc}
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-10">
+                            ${p.variants.map(v => `<button onclick="setVar(${p.id}, '${v}')" class="variant-btn ${p.selected === v ? 'selected' : ''}">${v}</button>`).join('')}
+                        </div>
+                        
+                        ${p.agotado
+                            ? `<button disabled class="w-full bg-[#1a1a1a] text-gray-600 py-5 text-[11px] font-black uppercase tracking-[0.2em] cursor-not-allowed">Producto Agotado</button>`
+                            : `<button onclick="addToCart(${p.id})" class="w-full bg-white text-black py-5 text-[11px] font-black uppercase tracking-[0.2em] active:scale-95 transition-all">Añadir al Carrito</button>`
+                        }
+                    </div>
+                </div>`;
+ 
+            // Posicionar el scroll en la imagen guardada
+            setTimeout(() => {
+                const carousel = document.getElementById(`carousel-${p.id}`);
+                if(carousel) carousel.scrollLeft = carousel.clientWidth * currentImgIdx[p.id];
+            }, 10);
+        }
+
+        // Cambio manual por clic (PC)
+        function changeImg(id, step) {
+            const p = products.find(x => x.id === id);
+            let gallery = (p.varPhotos && p.varPhotos[p.selected]) ? p.varPhotos[p.selected] : p.imgs;
+            const carousel = document.getElementById(`carousel-${id}`);
+            
+            currentImgIdx[id] = (currentImgIdx[id] + step + gallery.length) % gallery.length;
+            carousel.scrollTo({ left: carousel.clientWidth * currentImgIdx[id], behavior: 'smooth' });
+        }
+
+        // Sincronizar puntos al deslizar (Celular)
+        function updateDotsOnScroll(id) {
+            const carousel = document.getElementById(`carousel-${id}`);
+            const p = products.find(x => x.id === id);
+            let gallery = (p.varPhotos && p.varPhotos[p.selected]) ? p.varPhotos[p.selected] : p.imgs;
+            const newIdx = Math.round(carousel.scrollLeft / carousel.clientWidth);
+            if(newIdx !== currentImgIdx[id]) {
+                currentImgIdx[id] = newIdx;
+                gallery.forEach((_, i) => {
+                    const dot = document.getElementById(`dot-${id}-${i}`);
+                    if(dot) dot.className = `w-1.5 h-1.5 rounded-full transition-all ${i === newIdx ? 'bg-white scale-110' : 'bg-white/30'}`;
+                });
+            }
+        }
+
+        function setVar(id, v) {
+            const p = products.find(prod => prod.id === id);
+            p.selected = v;
+            currentImgIdx[id] = 0; // Reiniciar a la primera foto de la variante
+            showSingleProduct(id);
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+            document.getElementById('cart-overlay').classList.toggle('active');
+        }
+
+        function addToCart(id) {
+            const p = products.find(prod => prod.id === id);
+            const price = p.varPrices ? p.varPrices[p.selected] : p.price;
+            cart.push({ ...p, currentPrice: price, currentVariant: p.selected });
+            localStorage.setItem('cart_1811', JSON.stringify(cart));
+            updateCartUI();
+            if(!document.getElementById('cart-sidebar').classList.contains('open')) toggleCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart_1811', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            const count = document.getElementById('cart-count');
+            const total = document.getElementById('cart-total');
+            count.innerText = cart.length;
+            container.innerHTML = '';
+            let sum = 0;
+            cart.forEach((item, index) => {
+                let finalPrice = ACTIVAR_DESCUENTO ? item.currentPrice * 0.85 : item.currentPrice;
+                sum += finalPrice;
+                let gallery = (item.varPhotos && item.varPhotos[item.currentVariant]) ? item.varPhotos[item.currentVariant] : item.imgs;
+                container.innerHTML += `
+                    <div class="flex gap-4 items-center border-b border-white/5 pb-4">
+                        <img src="${gallery[0]}" class="w-16 h-16 object-cover object-center bg-black rounded-sm">
+                        <div class="flex-1 text-[9px] uppercase font-black">
+                            <h4 class="text-white">${item.name}</h4>
+                            <p class="text-gray-500">${item.currentVariant || ''}</p>
+                            ${ACTIVAR_DESCUENTO
+                                ? `<p class="text-gray-500 line-through text-[8px] mt-1">S/ ${Number(item.currentPrice).toFixed(2)}</p>
+                                   <p class="text-red-500 font-black text-[10px]">S/ ${Number(finalPrice).toFixed(2)}</p>`
+                                : `<p class="text-white mt-1">S/ ${Number(item.currentPrice).toFixed(2)}</p>`
+                            }
+                        </div>
+                        <button class="text-red-500 text-xs" onclick="removeFromCart(${index})">Eliminar</button>
+                    </div>`;
+            });
+            total.innerText = `S/ ${sum.toFixed(2)}`;
+        }
+
+        function checkoutWhatsApp() {
+            if(cart.length === 0) return;
+            let sum = 0;
+            let msg = `Hola 1811, quisiera realizar este pedido:\n\n`;
+            cart.forEach(item => {
+                let finalPrice = ACTIVAR_DESCUENTO ? item.currentPrice * 0.85 : item.currentPrice;
+                msg += `• *${item.name}* ${item.currentVariant ? '('+item.currentVariant+')' : ''} - S/ ${Number(finalPrice).toFixed(2)}\n`;
+                sum += finalPrice;
+            });
+            msg += `\n*TOTAL: S/ ${sum.toFixed(2)}*`;
+            const phone = "51947833118";
+            window.location.href = `whatsapp://send?phone=${phone}&text=${encodeURIComponent(msg)}`;
+        }
+
+        function toggleCategoriesMobile() { document.getElementById('category-panel-mobile').classList.toggle('active'); }
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+       // --- ANIMACIÓN DEL BANNER PROMOCIONAL ---
+let bannerIndex = 0;
+const bannerMessages = [
+    "ENVIO GRATIS PARA TODO LIMA",
+    "APROVECHA EL 15% OFF POR EL DÍA DEL PADRE"
+];
+
+// Cambia el mensaje cada 4 segundos (4000 milisegundos)
+setInterval(() => {
+    const banner = document.getElementById('promo-banner');
+    if(!banner) return;
+    
+    // 1. Oculta el texto suavemente (Fade out)
+    banner.classList.remove('opacity-100');
+    banner.classList.add('opacity-0');
+    
+    // 2. Espera medio segundo a que desaparezca para cambiar la frase
+    setTimeout(() => {
+        bannerIndex = (bannerIndex + 1) % bannerMessages.length;
+        banner.innerText = bannerMessages[bannerIndex];
+        
+        // 3. Vuelve a mostrar el texto (Fade in)
+        banner.classList.remove('opacity-0');
+        banner.classList.add('opacity-100');
+    }, 500); 
+}, 4000);
+        window.onload = init;
+    </script>
+</body>
+</html>
