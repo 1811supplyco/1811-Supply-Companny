@@ -2,7 +2,7 @@ name: Sincronizar Catalogo Meta a Web
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */6 * * x'
   workflow_dispatch:
 
 jobs:
@@ -44,42 +44,41 @@ jobs:
                 const rawProducts = response.data || [];
                 console.log(`Se encontraron ${rawProducts.length} productos en Meta.`);
 
-                // Transformar los productos de Meta al formato de tu tienda
-                const productsList = rawProducts.map(p => {
+                // Mapeo respetando tu estructura exacta (id, cat, name, desc, price, imgs)
+                const productsList = rawProducts.map((p, index) => {
+                  let categoria = "ACCESORIOS";
+                  const nombreUpper = (p.name || "").toUpperCase();
+                  if (nombreUpper.includes("DOPP KIT") || nombreUpper.includes("BRIEFCASE")) categoria = "BOLSOS";
+                  else if (nombreUpper.includes("WALLET")) categoria = "BILLETERAS";
+                  else if (nombreUpper.includes("BELT")) categoria = "CINTURONES";
+                  else if (nombreUpper.includes("LLAVERO") || nombreUpper.includes("GANCHO") || nombreUpper.includes("CARABINER")) categoria = "LLAVEROS";
+                  else if (nombreUpper.includes("BEAD")) categoria = "BEADS";
+                  else if (nombreUpper.includes("STRAP")) categoria = "STAGE GEAR";
+
                   return {
-                    id: p.retailer_id || p.id,
-                    name: p.name,
-                    description: p.description || "",
+                    id: p.retailer_id || index + 1,
+                    cat: categoria,
+                    name: p.name || "",
+                    desc: p.description || "",
                     price: parseFloat(p.price) || 0,
-                    imgs: [p.image_url]
+                    imgs: p.image_url ? [p.image_url] : ["images/placeholder.webp"],
+                    variants: []
                   };
                 });
 
-                const newProductsCode = "const products = " + JSON.stringify(productsList, null, 2) + ";";
+                const newProductsCode = "    const products = " + JSON.stringify(productsList, null, 4) + ";";
 
-                // Leer el index.html actual
                 let htmlContent = fs.readFileSync("index.html", "utf8");
-
                 const inicioTag = "<!-- INICIO_PRODUCTOS_AUTO -->";
                 const finTag = "<!-- FIN_PRODUCTOS_AUTO -->";
 
                 const partesInicio = htmlContent.split(inicioTag);
-                if (partesInicio.length < 2) {
-                  console.error("No se encontró la etiqueta INICIO_PRODUCTOS_AUTO en el index.html");
-                  process.exit(1);
-                }
-
                 const partesFin = partesInicio[1].split(finTag);
-                if (partesFin.length < 2) {
-                  console.error("No se encontró la etiqueta FIN_PRODUCTOS_AUTO en el index.html");
-                  process.exit(1);
-                }
 
-                // Reemplazar solo la sección de productos
-                const nuevoHtml = partesInicio[0] + inicioTag + "\n" + newProductsCode + "\n" + finTag + partesFin[1];
+                const nuevoHtml = partesInicio[0] + inicioTag + "\n" + newProductsCode + "\n    " + finTag + partesFin[1];
 
                 fs.writeFileSync("index.html", nuevoHtml, "utf8");
-                console.log("¡index.html actualizado exitosamente con los productos de Meta!");
+                console.log("¡index.html sincronizado correctamente!");
 
               } catch (e) {
                 console.error("Error procesando datos:", e);
@@ -95,5 +94,5 @@ jobs:
       - name: Guardar cambios automáticamente en GitHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Robot: Actualización automática del catálogo desde Meta"
+          commit_message: "Robot: Sincronización automática de productos"
           branch: main
