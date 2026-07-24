@@ -28,7 +28,7 @@ jobs:
 
           const token = process.env.META_ACCESS_TOKEN;
           const catalogId = process.env.META_CATALOG_ID;
-          const url = `https://graph.facebook.com/v18.0/${catalogId}?fields=products{id,name,description,price,image_url,retailer_id}&access_token=${token}`;
+          const url = `https://graph.facebook.com/v18.0/${catalogId}/products?fields=id,name,description,price,image_url,retailer_id&access_token=${token}`;
 
           https.get(url, (res) => {
             let data = "";
@@ -41,7 +41,7 @@ jobs:
                   process.exit(1);
                 }
                 
-                const rawProducts = response.products ? response.products.data : [];
+                const rawProducts = response.data || [];
                 console.log(`Se encontraron ${rawProducts.length} productos en Meta.`);
 
                 // Transformar los productos de Meta al formato de tu tienda
