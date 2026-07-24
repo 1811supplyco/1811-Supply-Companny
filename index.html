@@ -170,285 +170,39 @@
     </footer>
 
     <script>
-        <!-- INICIO_PRODUCTOS_AUTO -->
-    const products = [
-    {
-        "id": "j1p419k414",
-        "cat": "BOLSOS",
-        "name": "Utility Briefcase Distressed Chocolate",
-        "desc": "Maletín de trabajo de amplio espacio.\nAl exterior:\n-Bolsillo frontal\n-Handles utilitarios (para llevar portaplanos, chaqueta, periódicos, etc.)\nal interior:\n-Compartimento anti rayones para laptop,\n-Bolsillo con cierre\n-Dos bolsillos para cableado u otros accesorios.\n\nMaterial: Cuero de res full grain, canvas de alto gramaje, tela cordura, acero inoxidable, tela suede",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/713723100_2151028902319802_9213963845367235445_n.png?_nc_cat=107&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=F3hTLToUHHgQ7kNvwF_wVSe&_nc_oc=AdoDu1OKqgS5SNY7EFI7RATLCaczoOJDrthIzGwGL-mol6LZqh8HdR1RfSkMENXjm0M&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQFzM-LYkqzwVXlx8uQ57ccYjyyB3ttjeCcyX8PYr-8QpD6TqLMvFECumenwTjiNnwO9VpGch_PC&oh=00_AQAPaygrFKPbf8LylmdKFE8R40sdLVe9WG66FcSyqgg95Q&oe=6A68AFD5"
-        ],
-        "variants": []
-    },
-    {
-        "id": "6imza1y9i9",
-        "cat": "BOLSOS",
-        "name": "Utility Briefcase Camo",
-        "desc": "Maletín de trabajo de amplio espacio.\nAl exterior:\n-Bolsillo frontal\n-Handles utilitarios (para llevar portaplanos, chaqueta, periódicos, etc.)\nAl interior:\n-Compartimento anti rayones para laptop\n-Bolsillo con cierre\n-Dos bolsillos para cableado u otros accesorios.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/709862680_2344175152652804_1145437913915569320_n.webp?_nc_cat=109&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=0KnK6TFirswQ7kNvwFk_50G&_nc_oc=Adrd8ALqHLEo8SiZvXqR37lfBgFu8_Zl2Dex8kPWKnPyCWH28Dk6Nff3HmCX5QtLZgY&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQEg8-7d12UU1JshB9jQsehSi3uRjS1mHzjitchiumiOi9egYZC3IvwRyS5OmOX5B7CcC1Am4GDf&oh=00_AQCXn-iB8b14PyqcqlgXpZyN2kb7SQ1dCP8zPRro50xe-g&oe=6A68B0A4"
-        ],
-        "variants": []
-    },
-    {
-        "id": "s5v9qy2722",
-        "cat": "CINTURONES",
-        "name": "Mighty belt Blackout",
-        "desc": "Correa todo terreno de perfil casual perfecta para todas tus aventuras Medidas: 4 cm de ancho x largo personalizable Materiales: cuero de res full grain y herraje de acero inoxidable pavonado en negro.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea1-1.xx.fbcdn.net/v/t45.5328-4/707506413_1139234848399004_7141987957462930814_n.png?_nc_cat=106&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=-FDYTKxn0MAQ7kNvwECkLHH&_nc_oc=AdoejyF6HNShNNFUDn1pb3qZVNv25qQHRiMzSHVytzvPf9I-6fy3N8Gg5Ob0vb15gqI&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQGwD5ZdWs5y5gaLn60gKyDA4vi3VwKJESI06FxXUndvHDNMJH09ctEm9CGEiXLiB_NOaAv6jPpo&oh=00_AQC6-4wmi0VWu98knNpPJexgenGzFkOj80fs0ayT4BL7nA&oe=6A68A9B0"
-        ],
-        "variants": []
-    },
-    {
-        "id": "7j9q2wg82z",
-        "cat": "ACCESORIOS",
-        "name": "Stageman Negro",
-        "desc": "Strap para instrumentos (guitarras, bajos, etc.)de construcción robusta y perfil vintage\nmateriales: reata de algodón, cuero de res full grain y latón macizo\nmedidas: 5 cm x 140  cm aprox.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/705137235_938984029188792_2584189328156638584_n.png?_nc_cat=108&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=n8bTYvGUg-UQ7kNvwHNCNDD&_nc_oc=AdpWGsJP-5kmu_JaXY3hUvCsNObisTYcn1W0fgMuuAn4-RtIaYjjyP2gMuEJLKOgrmY&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQEjwv2_rrCQmd6TBsQfK4VKTfedPdHauO5sF7CdV3z78yAy0moyM7F3Tq-n3ebDI96Odg6eGr_l&oh=00_AQCj3p3Wkm4ooGHkzZeI2KtqNlLmR-Lsiw3-FcnKRaLs5A&oe=6A68B132"
-        ],
-        "variants": []
-    },
-    {
-        "id": "3wi1g75qeb",
-        "cat": "ACCESORIOS",
-        "name": "Stageman Red Crosses",
-        "desc": "Strap para instrumentos (guitarras, bajos, etc.)de construcción robusta y perfil vintage\nmateriales: jaquard, nylon, cuero de res full grain y latón macizo\nmedidas: 5 cm x 140  cm aprox.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/705229122_1247273553948092_3340609030373217407_n.png?_nc_cat=102&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=LPo3Fv8nCqQQ7kNvwE85Fch&_nc_oc=AdqCy7sbtkaIVhPD5n0i9jyxnPC_scQirWJqTVPs91MCe-Up0nxiHEyZXpDzBlOnHjs&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQFWrRkJjCOIJTrh_uc9zQ5bFBSjSdpTPsw5ILcueWoergZ6RoAfPZ3VT9ZDGmLHCQWZYoVj6mPe&oh=00_AQDWTALpGM85kK2wed_8p1cUFLq0VbluhUvcQsdyt9mYDg&oe=6A688EFD"
-        ],
-        "variants": []
-    },
-    {
-        "id": "kny2qj0fqj",
-        "cat": "ACCESORIOS",
-        "name": "Stageman Sharp Diamond",
-        "desc": "Strap para instrumentos (guitarras, bajos, etc.)de construcción robusta y perfil vintage\nmateriales: jaquard, nylon, cuero de res full grain y latón macizo\nmedidas: 5 cm x 140  cm aprox.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/704731116_1514279693708019_5622500814954432646_n.png?_nc_cat=102&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=4ambQxkQ26MQ7kNvwHCtADV&_nc_oc=AdryKdvJ90hscX855gcxqh6RukpAkOv_vdxY2ZjMwz9fYJLagw2cd0fZnVTCxptyWdQ&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQEr_CBu0RSesrkN-z33_vydnlD74vWPLzqi1Dj5ZZfEX3iRYttmx2p2W6FtIUkTC6cSxnbZiIqQ&oh=00_AQCjTmMhgyrMELdB7ujPxo3SbMk3G3tCiJ11KJYy6fhAfw&oe=6A68AADF"
-        ],
-        "variants": []
-    },
-    {
-        "id": "e5ch0v2adj",
-        "cat": "ACCESORIOS",
-        "name": "Stageman Monastery",
-        "desc": "Strap para instrumentos (guitarras, bajos, etc.)de construcción robusta y perfil vintage\nmateriales: jaquard, nylon, cuero de res full grain y latón macizo\nmedidas: 5 cm x 140  cm aprox.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/705235935_2843674275983241_6746875033666902489_n.png?_nc_cat=103&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=EMNjEAOsNCoQ7kNvwF8lhIJ&_nc_oc=AdqVhlI363uUNQrbswRtpS12Db0FlON0HN-7kxRWIToQ9hcKEwzolZRDztH-d5v-B8Y&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQE0vSCL6GZAZwAEFqpgiopHngYV9r3kUKH4QxvwxMXCLiCQG9DU51e-Ey12fzIdJXwv3Myawgnq&oh=00_AQAr9XvkqXIkUZcIopl2CGgFkUmmRrxq9RfFAAK37wUlCQ&oe=6A688C2F"
-        ],
-        "variants": []
-    },
-    {
-        "id": "6j0cx8wxsp",
-        "cat": "ACCESORIOS",
-        "name": "Stageman Ladrillo",
-        "desc": "Strap para instrumentos (guitarras, bajos, etc.)de construcción robusta y perfil vintage\nmateriales: reata de algodón, cuero de res full grain y latón macizo\nmedidas: 5 cm x 140  cm aprox.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea1-1.xx.fbcdn.net/v/t45.5328-4/705267303_1438538211649309_949242308154447827_n.png?_nc_cat=104&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=-LUcm--DEa0Q7kNvwGW6hmt&_nc_oc=AdplQmC5V5501FTHD06NYM4rtB74MJxGpEw44ozT6327aCXPO90SlfCnkkwpaB7DwZk&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQFX2i5MKIInrsJ22tPphebMJukv5cBhVw1rAHx_Kn9Y_5Coz-RnMxDA15HvfsOevEpue5HrNo3X&oh=00_AQDRCpxPI_EAG42X67RbK42afFAo9pJN86pAKWQBvWwrWQ&oe=6A68B73A"
-        ],
-        "variants": []
-    },
-    {
-        "id": "bwqfn2fu74",
-        "cat": "LLAVEROS",
-        "name": "Carabiner U",
-        "desc": "Mosquetón/llavero que se puede montar en la correa.\n\nMedidas: medidas: 3.5 cm x 7.5 cm aprox.\nMaterial: latón macizo",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea1-1.xx.fbcdn.net/v/t45.5328-4/704660803_1530109322124254_4709336992725344959_n.png?_nc_cat=106&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=mQ2xCal22l4Q7kNvwEt-TgF&_nc_oc=AdrYk7iO3X-6wDvPB-drmSpk56y-DWUt-qlkQLP39nSQBM371UoFOpm1DAwoha7zCvw&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQFm7Jq2W6kwEA1qBQpZnVTdC-b0dfSnSlW0dajo6lPg2yvVVXifxGsbev3RX2Rpv6_xrQVvcYqU&oh=00_AQBCMsdUureFvIXYti9g_bKTZkzqYId0tQ-wEH0ZL7Mpbg&oe=6A68951D"
-        ],
-        "variants": []
-    },
-    {
-        "id": "t68jiqcm9f",
-        "cat": "BEADS",
-        "name": "Modelo  01 Bead",
-        "desc": "Cuenta Decorativa",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/704558288_4494805190841422_5342980336833035701_n.png?_nc_cat=102&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=vDDoR8zxTNEQ7kNvwFkxAs8&_nc_oc=Adp7cZLWXa8nbrE8g9gY7VYRdONQLJDNoCmolvZqRMW_9RhEqkfQ44jPLo12JqbrmlQ&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQFYmAryYodCJAnAHcLNtSxcSZKUFKX-ou4mGAI4DKTv0V5Id4Yp19mXzL78TjqqL77eYnToWIsz&oh=00_AQDJkDLkYNRQrxYZLUDT9bWr0r4GVe7H1AETS1jxzPWleA&oe=6A68A69F"
-        ],
-        "variants": []
-    },
-    {
-        "id": "o4yvh2mz7p",
-        "cat": "BILLETERAS",
-        "name": "Ganadero Wallet Negro",
-        "desc": "Bifold híbrida con espacio para tarjetas, billetes y 4 espacios pequeños para mini herramientas de victorinox (lapicero, mondadientes, pinzas, etc.)\n\nMedidas: 10.5 cm x 9 cm aprox.\n\nMateriales: cuero de res full grain y tela cordura",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea1-1.xx.fbcdn.net/v/t45.5328-4/696390748_2373961926461265_4254048893264619875_n.png?_nc_cat=101&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=LXbYF9IjWtUQ7kNvwFTaY0d&_nc_oc=Adq4_6kJ8PCj8pDEw2b7h3MoFs0Z6Zr3KClqsgzaodzkUV-mrX4EwzkfgtPTPTwpLPU&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQG_CyhmLGYkFyO1oHNDtEnJZ8HTim095vicl_GvUPPVU0-Au0zqzoHDhCH8-na80VkiFGpQu6Eo&oh=00_AQCXj8L7Dc7yow1mQoOZMa9K_4KII4bVJ6n9b6hs9OpHQg&oe=6A68BAA0"
-        ],
-        "variants": []
-    },
-    {
-        "id": "zya3d3i47f",
-        "cat": "BILLETERAS",
-        "name": "Ganadero Wallet",
-        "desc": "Bifold híbrida con espacio para tarjetas, billetes y 4 espacios pequeños para mini herramientas de victorinox (lapicero, mondadientes, pinzas, etc.)\n\nMedidas: 10.5 cm x 9 cm aprox.\n\nMateriales: cuero de res full grain y tela cordura",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/696123728_1489461925961265_4153449663092978081_n.png?_nc_cat=109&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=GV_vDIT03GUQ7kNvwG34XfB&_nc_oc=AdoHQ0nsNmujuX6A7se_YB5JKoo9FHZ3Zq5AFAitClI17QwSdlqkji-tIh0jGOT2PdQ&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQFKQf7rJSxeMUgptxLXDn2nq23A85vNSyC7sIJW8QD_FTnalK74c2XWCYuGBmrbvp2wwZk7slYA&oh=00_AQBY7y86pG75MYSXYzJG5Wx4x45wU5D4TCF0N_zWVNO9fA&oe=6A68BDA7"
-        ],
-        "variants": []
-    },
-    {
-        "id": "w7qp1lo002",
-        "cat": "BOLSOS",
-        "name": "Utility Dopp Kit Camo",
-        "desc": "Neceser todo terreno con amplio espacio, bolsillo con cierre, bolsillos laterales y handle de doble agarre, perfecto para tus artículos de uso diario (aseo, tech, etc.)",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/701889064_2232135380908829_5087206369267984458_n.png?_nc_cat=107&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=4e3yH_gGlKgQ7kNvwH5ipSd&_nc_oc=AdpI_UkCfzC3zyW4hbDThdOp10canuZnI2g4xM0dsIyH76So-rpE4x6wgKwaFFx21O4&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQHXZtEx7PBV0NpbvwanA296vPyO5mIsZ99BmCFHgapBUWdseEB5wr_oB2_lkqIIQAK3VyDOhToj&oh=00_AQD29dRqUYaCBFzeJB0hEc-tpwWOpoLLlcGoyVmcFurWwg&oe=6A68AC52"
-        ],
-        "variants": []
-    },
-    {
-        "id": "q1vbyb29eb",
-        "cat": "BEADS",
-        "name": "Horned Skull Bead",
-        "desc": "Cuenta decorativa\nMaterial: Latón Macizo",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/698498719_870540918638461_8524659259755468281_n.png?_nc_cat=111&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=ebiyBRVGAlgQ7kNvwHUowfd&_nc_oc=AdrRsh5PORHfIwS5QqoSD9cylgknyDE84OU9bprCHRoZScmcS-uzIhBY46wbLIZy0fU&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQGrZTYscir6KqQta-l-vDwVaEPptJesGVro5JFBD1OTVeG4Y-TiOLRD64ZIuaXkumXPS0mtfKI7&oh=00_AQBZ1HupVEwwHEDmcrlYW1IH7S9xO27KILkeO5YHgaK4SQ&oe=6A68C039"
-        ],
-        "variants": []
-    },
-    {
-        "id": "5itaxoz8qt",
-        "cat": "BILLETERAS",
-        "name": "Mini Trucker Wallet",
-        "desc": "Billetera de camionero con amplio espacio\npara monedas,\nespacio para billetes (doblados)\ny espacio en el medio para\ntarjetas, cuenta con ojal \npara enganchar cadena.\n\nMedidas: 14 cm x 9.5 cm\nMateriales: cuero de res full\ngrain, laton\ny acero inoxidable.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea1-1.xx.fbcdn.net/v/t45.5328-4/700319912_989974296875031_9056067018083262238_n.png?_nc_cat=104&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=H5Tju9UvfhEQ7kNvwHsY7it&_nc_oc=AdocZt-Jkl9dWKPY_MWEwDi5Q3WMRESqxYYGEyYbW72gp7grNxzqGfHZ96Qpzg3U2HI&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQEmgnI-mBRnt76oYmG2Vf6FdJN6rCP0tW46UVWA3Y6QotsM5rRJgtela9t7zgU9kt4t7dB1ufNL&oh=00_AQAwDmUtnuvLaLMBhbvSzyXV4CFWl4h87d5vVrhLGNHiDg&oe=6A68B4F3"
-        ],
-        "variants": []
-    },
-    {
-        "id": "s8xgsm7rth",
-        "cat": "BILLETERAS",
-        "name": "Ganadero Wallet negro",
-        "desc": "Bifold híbrida con espacio para tarjetas, billetes y 4 espacios pequeños para mini herramientas de victorinox (lapicero, mondadientes, pinzas, etc.)\nMedidas: 10.5 cm x 9 cm aprox.\nMateriales: cuero de res full grain y tela cordura",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea1-1.xx.fbcdn.net/v/t45.5328-4/696390748_2373961926461265_4254048893264619875_n.png?_nc_cat=101&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=LXbYF9IjWtUQ7kNvwFTaY0d&_nc_oc=Adq4_6kJ8PCj8pDEw2b7h3MoFs0Z6Zr3KClqsgzaodzkUV-mrX4EwzkfgtPTPTwpLPU&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQGA28G3oEpGSbMnTx-2B4xWS3zLCzLs5qrD46Loig7lBEH7mVgZ6hSGTiznrvxfr97hl89jx9yc&oh=00_AQCbYEDiJXPsEIjxJozYDRJw3MaQXH7OIfKjiELD_czBgQ&oe=6A68BAA0"
-        ],
-        "variants": []
-    },
-    {
-        "id": "l5esxtu6ul",
-        "cat": "CINTURONES",
-        "name": "Mighty belt + Black buckle",
-        "desc": "Correa todo terreno\nde perfil casual\nperfecta para todas tus\naventuras\nMedidas: 4 cm de ancho x largo\npersonalizable\nMateriales: cuero de res full grain\ny herraje de acero inoxidable\npavonado en negro.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea1-1.xx.fbcdn.net/v/t45.5328-4/681300873_948392111153880_157577281987950517_n.png?_nc_cat=101&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=WHhdfzQqfEEQ7kNvwHGuyVG&_nc_oc=AdqhVI0JG-Bdl8WuOVrEpeLcjVav0tZyj6kBeI-RtvpmMa_sqztfL5Hwo42-T4YH1X4&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQELW65QJs8am6cWdpc37Rn9c74Z30aZLA0BV7D33Ea9nvFKXrVErQ3m7p7Br2OzYLXDBD9G9sNI&oh=00_AQDcbjR4dk6ug29Ma4kitxoScO8u4Wumt5DNnIUPQ8EOFg&oe=6A68A9D4"
-        ],
-        "variants": []
-    },
-    {
-        "id": "h97pe6q468",
-        "cat": "ACCESORIOS",
-        "name": "Coasters",
-        "desc": "Set de posavasos de cuero\nde perfil rústico\nindispensables para tu\ncristalería / tazas\ny buenazo para tus reuniones.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/677720455_1765627704802668_5085512226389266061_n.png?_nc_cat=110&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=NNxJmoA1AmUQ7kNvwHyaoJr&_nc_oc=AdqoMEtl9S_d3YzVc5aP2M9pdPH4Fhe5QZWU81-7Vnzjy9UJZ9LkWANKd8_4jjM5U4c&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQGFIznp9SpeFI4mNkMA1jNsOogLee9LxsN-Od_yqIVv7-tqNlHpVk3e2jrhtld2wr08p9ZFYZd9&oh=00_AQBStKFOan2XOkxzmqGTftGQpq2reZ3rMOPVALwzOvrXCg&oe=6A68ADD3"
-        ],
-        "variants": []
-    },
-    {
-        "id": "nif2dq7v3r",
-        "cat": "ACCESORIOS",
-        "name": "Portalentes",
-        "desc": "Funda para lentes con interior\n\nantirrayones y ojal\n\npara enganche\n\nMedidas: 18 cm x 7.5 cm aprox.\n\nMateriales: cuero de res\n\nfull grain, herraje de\n\nlatón y acero inoxidable.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea1-1.xx.fbcdn.net/v/t45.5328-4/686481976_911781865183130_265691678572469528_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=KYX7YNzKr_MQ7kNvwH5_yUB&_nc_oc=Adrfw0Zt2CxeGWxk-HH2E69wRERvzjNT6YVu8fHd1aQERMBFW6dGvXzFqgtRAuQAkSo&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQENL_BnzSEtqw3V58BFmvQ_iTCMacLNZoS35qqjXZ9ethjy2oYz-b5axG0R6i3Li1hWFKK1DNIB&oh=00_AQCkK3j-44aIiL9QAOOnNNG8EwyjYwrZOvFhryiuIVpVCA&oe=6A6899AF"
-        ],
-        "variants": []
-    },
-    {
-        "id": "dcuve0drr7",
-        "cat": "ACCESORIOS",
-        "name": "Utility Tray Small",
-        "desc": "Bandeja para colocar\nobjetos de bolsillo\nperfecto para tu casa u oficina\nMedidas:\nS (14 cm x 14 cm aprox.)\nM (20 cm x 20 cm aprox.)\nL (20 cm x 30 cm aprox.)\nMateriales: cuero de res full grain\nherraje de acero inoxidable\ny tela tweed",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/679573910_1283596020632443_3253409910339064826_n.png?_nc_cat=103&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=4_LxijmTlVEQ7kNvwH4CFqY&_nc_oc=AdoClyzNwjiTKOUjGm8yfLSyM-NHc0_kzK_8nPARdmgTOUxEO0ofvVGU8PQrcFqP8ow&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQHC-xcpa4OTiDW4uVSqDkwQntfXpGb4BK27yAMnSNvTXJuPX5_3pwshUXKZ44icdwHQCk34blQp&oh=00_AQDmLDKFyPjBuI5-LgkUBUpwjsJlVGpRKK6aMzUiag9nTw&oe=6A68BDFC"
-        ],
-        "variants": []
-    },
-    {
-        "id": "nsc1jrb014",
-        "cat": "ACCESORIOS",
-        "name": "Utility Tray Medium",
-        "desc": "Bandeja para colocar\nobjetos de bolsillo\nperfecto para tu casa u oficina\nMedidas:\nS (14 cm x 14 cm aprox.)\nM (20 cm x 20 cm aprox.)\nL (20 cm x 30 cm aprox.)\nMateriales: cuero de res full grain\nherraje de acero inoxidable\ny tela tweed",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea1-1.xx.fbcdn.net/v/t45.5328-4/686537918_4444107032525513_3954282337230593893_n.png?_nc_cat=101&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=ixUPE-fEXa4Q7kNvwF9Ot6k&_nc_oc=Adq9d9ek-Po7caZ8VRoHWu6oqNOtl07OjAfL0LCFvsGDrr8YghlCjc7miSbVB-qRa-M&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQGifwhS7IJjBIsvyI-KZfHsnqxdsxjRecLa6AMiwOiqDsGHYHY4rUDT4pWCAGCoh5om0iRfTpZn&oh=00_AQDDD2E4m-IGwR-SO4kP7tbtOqeaUbIgymwNtCeg9SmvTw&oe=6A68B9C5"
-        ],
-        "variants": []
-    },
-    {
-        "id": "8o3cxucd1m",
-        "cat": "ACCESORIOS",
-        "name": "Utility Tray Large",
-        "desc": "Bandeja para colocar\nobjetos de bolsillo\nperfecto para tu casa u oficina\nMedidas:\nS (14 cm x 14 cm aprox.)\nM (20 cm x 20 cm aprox.)\nL (20 cm x 30 cm aprox.)\nMateriales: cuero de res full grain\nherraje de acero inoxidable\ny tela tweed",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/678957457_26793094600371875_2898940012297831917_n.png?_nc_cat=107&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=-tSpaeqXk3sQ7kNvwE06yYC&_nc_oc=AdoeI0KSdbWGnnm_JiU0dQSbQ7merQwQiptMpxd0gbaPu0KFrcZoG8p3LHp-UKFajkM&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQH4P9vLDKS3RTa1Zubu5SIIttlLcBu_9P5F2CnxfP-I9XRm85ZNuM3JNxEJ-jeyvXh6ScyOkyLT&oh=00_AQDgRgU6xXZVpiHwNE40W1TycDlL3F5pMd9sEB_DAkah_g&oe=6A68A86F"
-        ],
-        "variants": []
-    },
-    {
-        "id": "yjblvd9fi5",
-        "cat": "BOLSOS",
-        "name": "Utility Dopp Kit Distressed Chocolate",
-        "desc": "Neceser todo terreno con\namplio espacio, bolsillo con\ncierre, bolsillos laterales\ny handle de doble agarre, perfecto\npara tus artículos de uso diario\n(aseo, tech, etc.)\nMedidas: 16 cm x 25 cm aprox\n(sin contar el handle)\nMateriales: cuero de res full grain\ncanvas de alto gramaje\ncordura nylon, acero inoxidable\ny latón.",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/681355074_2492247074556131_8380912482888315437_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=Yci9tFVfdQMQ7kNvwEvbx0n&_nc_oc=Adoz_nPXKoAPzwB9gIMyNA2an8rpzyYADvrYiuS_JEW5-mBdJOHiiw7MS1IusrZB0is&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQH7EHntwKmZBMjRDW9lt3lVb13LdK5EoG0a9Syr9VSlwjDTSSeqIR6ELC2HyBPiwJ3AVQNly-m-&oh=00_AQDtqnmad0p-bRyvMcJSdMNohpDYXP3uZz8de_gJ_pzcWw&oe=6A68B465"
-        ],
-        "variants": []
-    },
-    {
-        "id": "6exjw8rkqm",
-        "cat": "BILLETERAS",
-        "name": "Zippered Wallet",
-        "desc": "Billetera minimalista de\ndiseño japones para\ntarjetas, billetes y monedas\nMedidas: 9.5 cm x 11 cm aprox.\nMateriales: cuero de res\nfull grain y herraje de\nlatón macizo",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/683488011_3863849547255408_7574571763200598437_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=Fyv4N3_ViHIQ7kNvwHFcER4&_nc_oc=Adpix23hArqy102NE-c0SbGvDoJpnw_uw48lVOHxG3xJJ1KIbft7QUO44fqxjcIsNgQ&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQEAwbXDt7Ksk1OoGwsfqH9MKyTBXkNKYFuNVdY_rWIxLZSEDMDhP7Tp0DByBobIUPBYDQR55Rt6&oh=00_AQDBNLtRX0fsPeve5p1uk68cDOqVan-jnk09DysJfGZiPA&oe=6A68BA36"
-        ],
-        "variants": []
-    },
-    {
-        "id": "alln3lorf6",
-        "cat": "BILLETERAS",
-        "name": "Dídac Wallet Negro",
-        "desc": "TARJETERO MINIMALISTA\nPERFECTO PARA USO DIARIO\nPUEDES LLEVAR\nTARJETAS Y BILLETES\n\nMEDIDAS: 6.7 cm X 10.5 cm APROX.\nMATERIALES: CUERO DE RES\nFULL GRAIN Y HERRAJE DE\nLATON / ACERO INOXIDABLE",
-        "price": 0,
-        "imgs": [
-            "https://scontent-sea5-1.xx.fbcdn.net/v/t45.5328-4/702160864_26886039417729157_2823464284091450604_n.png?_nc_cat=109&ccb=1-7&_nc_sid=c7e7b7&_nc_ohc=J77qL-wgCZsQ7kNvwEzpGPK&_nc_oc=AdpUciBC-Osqac_O9616JFrU1jhcE1EGRw4tndUlANu3H6-nqWajV0LhJ5hgRn__LUw&_nc_zt=23&_nc_ht=scontent-sea5-1.xx&edm=ANyJclEEAAAA&_nc_gid=icEJoSwO3VFGH5cfrlqHhw&_nc_tpa=Q5bMBQG0TXj5J_DwEyQs-UJ_XYSv0aSgPVf9ivHbYeikL7nS703q1qa4MN28ec9EWnPszbxKJ48UoFIs&oh=00_AQCpLwNKgOIHglBKE3hv8Tda2wMK84YkpErlehaHlMx1pw&oe=6A68B409"
-        ],
-        "variants": []
-    }
-];
-    <!-- FIN_PRODUCTOS_AUTO -->
+        const products = [
+            { id: 1, cat: "BOLSOS", name: "UTILITY DOPP KIT DISTRESSED CHOCOLATE", desc: "NECESER TODO TERRENO CON AMPLIO ESPACIO, BOLSILLO CON CIERRE, BOLSILLOS LATERALES Y HANDLE DE DOBLE AGARRE, PERFECTO PARA TUS ARTÍCULOS DE USO DIARIO (ASEO, TECH, ETC.)<br><br>MEDIDAS: 16 cm X 25 cm APROX (SIN CONTAR EL HANDLE)<br><br>MATERIALES: CUERO DE RES FULL GRAIN, CANVAS DE ALTO GRAMAJE, CORDURA NYLON, ACERO INOXIDABLE Y LATÓN", price: 179, imgs: ["images/DOPPKITmarron.webp", "images/detalleDOPPKIT.webp", "images/detalleDOPPKIT2.webp"], variants: [] },
+            { id: 15, cat: "BOLSOS", name: "UTILITY DOPP KIT CAMO", desc: "NECESER TODO TERRENO CON AMPLIO ESPACIO, BOLSILLO CON CIERRE, BOLSILLOS LATERALES Y HANDLE DE DOBLE AGARRE, PERFECTO PARA TUS ARTÍCULOS DE USO DIARIO (ASEO, TECH, ETC.)<br><br>MEDIDAS: 16 cm X 25 cm APROX (SIN CONTAR EL HANDLE)<br><br>MATERIALES: CUERO DE RES FULL GRAIN, CORDURA NYLON, ACERO INOXIDABLE Y LATÓN", price: 179, imgs: ["images/camodoppkit.webp", "images/camodoppkit2.webp", "images/camodoppkit1.webp"], variants: [] },
+            { id: 21, cat: "BILLETERAS", name: "ZIPPERED WALLET", desc: "BILLETERA MINIMALISTA DE DISEÑO JAPONES PARA TARJETAS, BILLETES Y MONEDAS.<br><br>MEDIDAS: 9.5 CM X 11 CM APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE LATÓN MACIZO", price: 89, imgs: ["images/ZIPPERED.webp", "images/ZIPPEREDdetalle.webp"], variants: [] },
+            { id: 3, cat: "BILLETERAS", name: "GANADERO WALLET", desc: "BIFOLD HÍBRIDA CON ESPACIO PARA TARJETAS, BILLETES Y 4 ESPACIOS PEQUEÑOS PARA MINI HERRAMIENTAS DE VICTORINOX (LAPICERO, MONDADIENTES, PINZAS, ETC.)<br><br>MEDIDAS: 10.5 CM X 9 CM APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y TELA CORDURA", price: 109, varPhotos: { "CHOCOLATE": ["images/GANADERO.webp", "images/GANADEROabierto.webp", "images/GANADEROdetalle.webp"], "NEGRO": ["images/GANADEROnegro.webp", "images/GANADEROnegroabierto.webp", "images/GANADEROdetallenegro.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
+            { id: 4, cat: "BILLETERAS", name: "DÍDAC WALLET", desc: "TARJETERO MINIMALISTA PERFECTO PARA USO DIARIO PUEDES LLEWAR TARJETAS Y BILLETES.<br><br>MEDIDAS: 6.7 cm X 10.5 cm APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE LATON / ACERO INOXIDABLE", price: 129, varPhotos: { "CHOCOLATE": ["images/didac.webp", "images/DIDACatras.webp"], "NEGRO": ["images/DIDACnegro.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
+            { id: 5, cat: "ACCESORIOS", name: "MULTITOOL CARD + FUNDA DE CUERO", desc: "TARJETA MULTIHERRAMIENTA CON 10 FUNCIONES:<br>• ABRE LATAS<br>• ABRE CAJAS<br>• DESTORNILLADOR PLANO<br>• REGLA 4 CM<br>• ABRE BOTELLAS<br>• LLAVE INGLESA 6 MEDIDAS<br>• LLAVE MARIPOSA<br>• SIERRA<br>• ORIFICIO PARA LANYARD<br>• INDICADOR AUXILIAR DE DIRECCIÓN<br><br>MATERIAL: ACERO INOXIDABLE", price: 89, varPhotos: { "CHOCOLATE": ["images/MULTITOOL.webp", "images/MULTITOOLfunda.webp"], "NEGRO": ["images/MULTITOOL.webp", "images/MULTITOOLfundanegra.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
+            { id: 6, cat: "ACCESORIOS", name: "UTILITY TRAY", desc: "BANDEJA PARA COLOCAR OBJETOS DE BOLSILLO PERFECTO PARA TU CASA U OFICINA.<br><br>MATERIALES: CUERO DE RES FULL GRAIN, HERRAJE DE ACERO INOXIDABLE Y TELA TWEED", price: 99, varPhotos: { "SMALL": ["images/BANDEJAS.webp"], "MEDIUM": ["images/BANDEJAM.webp"], "LARGE": ["images/BANDEJAL.webp"] }, varPrices: { "SMALL": 99, "MEDIUM": 129, "LARGE": 159 }, varDesc: { "SMALL": "MEDIDAS: 14 cm X 14 cm APROX.", "MEDIUM": "MEDIDAS: 20 cm X 20 cm APROX.", "LARGE": "MEDIDAS: 20 cm X 30 cm APROX." }, variants: ["SMALL", "MEDIUM", "LARGE"], selected: "SMALL" },
+            { id: 7, cat: "ACCESORIOS", name: "PORTALENTES", desc: "FUNDA PARA LENTES CON INTERIOR ANTIRRAYONES Y OJAL PARA ENGANCHE.<br><br>MEDIDAS: 18 cm X 7.5 cm APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN, HERRAJE DE LATÓN Y ACERO INOXIDABLE", price: 99, imgs: ["images/PORTALENTES.webp", "images/PORTALENTESatras.webp"], variants: [] },
+            { id: 8, cat: "CINTURONES", name: "MIGHTY BELT + BLACK BUCKLE", desc: "CORREA TODO TERRENO DE PERFIL CASUAL PERFECTA PARA TODAS TUS AVENTURAS.<br><br>MEDIDAS: 4 cm DE ANCHO X LARGO PERSONALIZABLE.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE ACERO INOXIDABLE PAVONADO EN NEGRO", price: 149, imgs: ["images/MIGHTY.webp", "images/MIGHTYcompleta.webp"], variants: [], agotado: false },
+            { id: 20, cat: "CINTURONES", name: "MIGHTY BELT BLACKOUT", desc: "CORREA TODO TERRENO DE PERFIL CASUAL PERFECTA PARA TODAS TUS AVENTURAS.<br><br>MEDIDAS: 4 cm DE ANCHO X LARGO PERSONALIZABLE.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE ACERO INOXIDABLE PAVONADO EN NEGRO", price: 149, imgs: ["images/blackout1.webp", "images/blackout.webp"], variants: [], agotado: false },
+            { id: 9, cat: "LLAVEROS", name: "EL GANCHO", desc: "LLAVERO CON MOSQUETÓN DE PERFIL TÁCTICO.<br><br>MEDIDAS: 13.5 cm X 3 cm APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN AND HERRAJE DE ACERO INOXIDABLE", price: 79, varPhotos: { "CHOCOLATE": ["images/GANCHO.webp"], "NEGRO": ["images/GANCHOnegro.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
+            { id: 10, cat: "BEADS", name: "SKULL BEAD", desc: "CUENTA DECORATIVA.<br><br>MATERIAL: LATÓN MACIZO", price: 89, imgs: ["images/SKULLBEAD.webp"], variants: [] },
+            { id: 11, cat: "BEADS", name: "BABY DEVIL BEAD", desc: "CUENTA DECORATIVA.<br><br>MATERIAL: LATÓN MACIZO", price: 99, imgs: ["images/BABYDEVIL.webp"], variants: [] },
+            { id: 12, cat: "ACCESORIOS", name: "COASTERS", desc: "SET DE POSAVASOS DE CUERO DE PERFIL RÚSTICO INDISPENSABLES PARA TU CRISTALERIA / TAZAS Y BUENAZO PARA TUS REUNIONES.<br><br>MEDIDAS: 11 cm (DIAMETRO)<br><br>MATERIALES: CUERO DE RES FULL GRAIN", price: 89, varPhotos: { "JUEGO DE 4": ["images/COASTERS.webp", "images/COASTERsola.webp"], "JUEGO DE 6": ["images/COASTERS.webp", "images/COASTERsola.webp"] }, varPrices: { "JUEGO DE 4": 89, "JUEGO DE 6": 119 }, variants: ["JUEGO DE 4", "JUEGO DE 6"], selected: "JUEGO DE 4" },
+            { id: 16, cat: "LLAVEROS", name: "CARABINER U", desc: "MOSQUETÓN/LLAVERO QUE SE PUEDE MONTAR EN LA CORREA.<br><br>MEDIDAS: MEDIDAS: 3.5 CM X 7.5 CM APROX.<br>MATERIAL: LATÓN MACIZO", price: 79, imgs: ["images/caraviner.webp","images/caraviner2.webp"], variants: [], agotado: false },
+            { id: 17, cat: "BEADS", name: "MODELO 01 BEAD", desc: "CUENTA DECORATIVA.<br><br>MATERIAL: LATÓN MACIZO", price: 89, imgs: ["images/01bead.webp"], variants: [] },
+            { id: 13, cat: "BILLETERAS", name: "MINI TRUCKER WALLET", desc: "BILLETERA DE CAMIONERO CON AMPLIO ESPACIO PARA MONEDAS, ESPACIO PARA BILLETES (DOBLADOS) Y ESPACIO EN EL MEDIO PARA TARJETAS, CUENTA CON OJAL PARA ENGANCHAR CADENA.<br><br>MATERIALES: CUERO DE RES FULL GRAIN, LATON y ACERO INOXIDABLE<br>MEDIDAS: 14 CM x 9.5 CM", price: 129, varPhotos: { "SIN CADENA": ["images/trucker1.webp", "images/trucker2.webp"], "CON CADENA": ["images/trucker3.webp"] }, varPrices: { "SIN CADENA": 129, "CON CADENA": 159}, variants: ["SIN CADENA", "CON CADENA"], selected: "SIN CADENA" },
+            { id: 14, cat: "BEADS", name: "HORNED SKULL BEAD", desc: "CUENTA DECORATIVA.<br><br>MATERIAL: LATÓN MACIZO", price: 59, imgs: ["images/hornbead.webp"], variants: [] },
+            { id: 18, cat: "STAGE GEAR", name: "STRAP STAGEMAN", desc: "STRAP PARA INSTRUMENTOS (GUITARRAS, BAJOS, ETC.) DE CONSTRUCCIÓN ROBUSTA Y PERFIL VINTAGE<br><br>MEDIDAS: 5 CM X 140  CM APROX.<br><br>MATERIALES: JAQUARD, NYLON, CUERO DE RES FULL GRAIN Y LATÓN MACIZO", price: 159, 
+             varPhotos: { "MONASTERY": ["images/strapmonastery.webp", "images/strapmonastery1.webp", "images/strapmonastery2.webp", "images/strapmonastery3.webp", "images/strapmonastery4.webp"], 
+                          "SHARP DIAMOND": ["images/strapninja.webp", "images/strapninja1.webp", "images/strapninja2.webp", "images/strapninja3.webp", "images/strapninja4.webp"], 
+                          "RED CROSSES": ["images/straprojo.webp", "images/straprojo1.webp", "images/straprojo2.webp", "images/straprojo3.webp", "images/straprojo4.webp"]
+                        }, variants: ["MONASTERY", "SHARP DIAMOND", "RED CROSSES"], selected: "SHARP DIAMOND" },
+            { id: 19, cat: "STAGE GEAR", name: "STRAP STAGEMAN COTTON", desc: "STRAP PARA INSTRUMENTOS (GUITARRAS, BAJOS, ETC.) DE CONSTRUCCIÓN ROBUSTA Y PERFIL VINTAGE<br><br>MEDIDAS: 5 CM X 140  CM APROX.<br><br>MATERIALES: REATA DE ALGODÓN, CUERO DE RES FULL GRAIN Y LATÓN MACIZO", price: 159, 
+             varPhotos: { "LADRILLO": ["images/strapnaranja.webp", "images/strapnaranja1.webp", "images/strapnaranja2.webp", "images/strapnaranja3.webp", "images/strapnaranja4.webp"], 
+                          "NEGRO": ["images/strapnegro.webp", "images/strapnegro1.webp","images/strapnegro2.webp", "images/strapnegro3.webp", "images/strapnegro4.webp"] 
+                        }, variants: ["LADRILLO", "NEGRO"], selected: "LADRILLO" },
+            { id: 2, cat: "BOLSOS", name: "UTILITY BRIEFCASE CAMO", desc: "MALETÍN DE TRABAJO DE AMPLIO ESPACIO.<br>AL EXTERIOR:<br>-BOLSILLO FRONTAL<br>-HANDLES UTILITARIOS (PARA LLEVAR PORTAPLANOS, CHAQUETA, PERIÓDICOS, ETC.)<br>AL INTERIOR:<br>-COMPARTIMENTO ANTI RAYONES PARA LAPTOP,<br>-BOLSILLO CON CIERRE<br>-DOS BOLSILLOS PARA CABLEADO U OTROS ACCESORIOS.<br><br>MATERIAL: CUERO DE RES FULL GRAIN, TELA CORDURA, ACERO INOXIDABLE, TELA SUEDE", price: 579, imgs: ["images/briefcase1.webp", "images/briefcase2.webp", "images/briefcase3.webp", "images/briefcase4.webp", "images/briefcase5.webp", "images/briefcase6.webp"], variants: [] },
+            { id: 22, cat: "BOLSOS", name: "UTILITY BRIEFCASE DISTRESSED CHOCOLATE", desc: "MALETÍN DE TRABAJO DE AMPLIO ESPACIO.<br>AL EXTERIOR:<br>-BOLSILLO FRONTAL<br>-HANDLES UTILITARIOS (PARA LLEVAR PORTAPLANOS, CHAQUETA, PERIÓDICOS, ETC.)<br>AL INTERIOR:<br>-COMPARTIMENTO ANTI RAYONES PARA LAPTOP,<br>-BOLSILLO CON CIERRE<br>-DOS BOLSILLOS PARA CABLEADO U OTROS ACCESORIOS.<br><br>MATERIAL: CUERO DE RES FULL GRAIN, CANVAS DE ALTO GRAMAJE, TELA CORDURA, ACERO INOXIDABLE, TELA SUEDE", price: 579, imgs: ["images/briefcasechoco1.webp", "images/briefcasechoco2.webp", "images/briefcasechoco3.webp", "images/briefcasechoco4.webp", "images/briefcasechoco5.webp", "images/briefcasechoco6.webp"], variants: [] }
+
+        ];
+
         // --- INTERRUPTOR DE DESCUENTO ---
         const ACTIVAR_DESCUENTO = true; // Cambia a false para volver a los precios regulares
         // --------------------------------
