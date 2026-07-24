@@ -2,7 +2,7 @@ name: Sincronizar Catalogo Meta a Web
 
 on:
   schedule:
-    - cron: '0 */6 * * x'
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -44,7 +44,6 @@ jobs:
                 const rawProducts = response.data || [];
                 console.log(`Se encontraron ${rawProducts.length} productos en Meta.`);
 
-                // Mapeo respetando tu estructura exacta (id, cat, name, desc, price, imgs)
                 const productsList = rawProducts.map((p, index) => {
                   let categoria = "ACCESORIOS";
                   const nombreUpper = (p.name || "").toUpperCase();
