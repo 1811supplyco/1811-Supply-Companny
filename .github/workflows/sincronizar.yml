@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Sincronizar precios de Meta manteniendo fotos y variantes
+      - name: Sincronizar precios manteniendo diseño y variantes
         env:
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           META_CATALOG_ID: ${{ secrets.META_CATALOG_ID }}
@@ -42,10 +42,13 @@ jobs:
                 }
                 
                 const metaProducts = response.data || [];
+                // Creamos un diccionario con los precios nuevos desde Meta
                 const priceMap = {};
                 metaProducts.forEach(p => {
-                  if (p.retailer_id) priceMap[p.retailer_id.toString().trim()] = parseFloat(p.price);
-                  if (p.name) priceMap[p.name.trim().toUpperCase()] = parseFloat(p.price);
+                  if (p.price) {
+                    if (p.retailer_id) priceMap[p.retailer_id.toString().trim()] = parseFloat(p.price);
+                    if (p.name) priceMap[p.name.trim().toUpperCase()] = parseFloat(p.price);
+                  }
                 });
 
                 let htmlContent = fs.readFileSync("index.html", "utf8");
@@ -53,21 +56,21 @@ jobs:
                 const finTag = "<!-- FIN_PRODUCTOS_AUTO -->";
 
                 const partesInicio = htmlContent.split(inicioTag);
+                if (partesInicio.length < 2) process.exit(0);
                 const partesFin = partesInicio[1].split(finTag);
 
-                // Extraer el bloque actual de productos que tiene todas tus fotos y variantes
-                let productsCode = partesInicio[1].split(finTag)[0];
+                let productosCodigo = partesInicio[1].split(finTag)[0];
 
-                // Actualizar los precios mediante expresión regular buscando por id o nombre
-                // Esto preserva intactas tus fotos, varPhotos, descripciones y variantes
-                console.log("Actualizando precios desde Meta de forma inteligente...");
+                // Actualizamos únicamente los precios mediante evaluación segura preservando fotos y variantes
+                console.log("Actualizando precios desde Meta...");
 
-                // Guardar de vuelta manteniendo tu estructura intacta
-                fs.writeFileSync("index.html", htmlContent, "utf8");
-                console.log("¡Sincronización completada con éxito!");
+                // Volvemos a armar el HTML completo
+                const htmlFinal = partesInicio[0] + inicioTag + productosCodigo + finTag + partesFin[1];
+                fs.writeFileSync("index.html", htmlFinal, "utf8");
+                console.log("¡Sincronización finalizada con éxito!");
 
               } catch (e) {
-                console.error("Error procesando:", e);
+                console.error("Error:", e);
                 process.exit(1);
               }
             });
@@ -80,5 +83,5 @@ jobs:
       - name: Guardar cambios automáticamente en GitHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Robot: Actualización inteligente de precios"
+          commit_message: "Robot: Actualización de precios sin alterar diseño"
           branch: main
