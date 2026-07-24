@@ -2,9 +2,8 @@ name: Sincronizar Catalogo Meta a Web
 
 on:
   schedule:
-    # Se ejecutará automáticamente cada 6 horas
     - cron: '0 */6 * * *'
-  workflow_dispatch: # Permite ejecutarlo manualmente cuando quieras desde GitHub
+  workflow_dispatch:
 
 jobs:
   sincronizar:
@@ -18,7 +17,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Descargar productos desde Meta y actualizar Web
+      - name: Descargar productos desde Meta y actualizar index.html
         env:
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           META_CATALOG_ID: ${{ secrets.META_CATALOG_ID }}
@@ -41,11 +40,46 @@ jobs:
                   console.error("Error al obtener datos de Meta:", response);
                   process.exit(1);
                 }
-                
-                console.log(`Se encontraron ${response.data.length} productos en Meta.`);
-                // Próximamente aquí inyectaremos la magia para actualizar tu index.html
+
+                // Transformar los productos de Meta al formato de tu tienda
+                const productsList = response.data.map(p => {
+                  return {
+                    id: p.retailer_id || p.id,
+                    name: p.name,
+                    description: p.description || "",
+                    price: parseFloat(p.price) || 0,
+                    imgs: [p.image_url]
+                  };
+                });
+
+                const newProductsCode = "const products = " + JSON.stringify(productsList, null, 2) + ";";
+
+                // Leer el index.html actual
+                let htmlContent = fs.readFileSync("index.html", "utf8");
+
+                const inicioTag = "<!-- INICIO_PRODUCTOS_AUTO -->";
+                const finTag = "<!-- FIN_PRODUCTOS_AUTO -->";
+
+                const partesInicio = htmlContent.split(inicioTag);
+                if (partesInicio.length < 2) {
+                  console.error("No se encontró la etiqueta INICIO_PRODUCTOS_AUTO en el index.html");
+                  process.exit(1);
+                }
+
+                const partesFin = partesInicio[1].split(finTag);
+                if (partesFin.length < 2) {
+                  console.error("No se encontró la etiqueta FIN_PRODUCTOS_AUTO en el index.html");
+                  process.exit(1);
+                }
+
+                // Reemplazar solo la sección de productos
+                const nuevoHtml = partesInicio[0] + inicioTag + "\n" + newProductsCode + "\n" + finTag + partesFin[1];
+
+                fs.writeFileSync("index.html", nuevoHtml, "utf8");
+                console.log("¡index.html actualizado exitosamente con los productos de Meta!");
+
               } catch (e) {
-                console.error("Error procesando JSON:", e);
+                console.error("Error procesando datos:", e);
                 process.exit(1);
               }
             });
@@ -54,3 +88,9 @@ jobs:
             process.exit(1);
           });
           '
+
+      - name: Guardar cambios automáticamente en GitHub
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Robot: Actualización automática del catálogo desde Meta"
+          branch: main
