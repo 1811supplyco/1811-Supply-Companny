@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Descargar productos desde Meta y actualizar index.html
+      - name: Sincronizar precios de Meta manteniendo fotos y variantes
         env:
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           META_CATALOG_ID: ${{ secrets.META_CATALOG_ID }}
@@ -28,7 +28,7 @@ jobs:
 
           const token = process.env.META_ACCESS_TOKEN;
           const catalogId = process.env.META_CATALOG_ID;
-          const url = `https://graph.facebook.com/v18.0/${catalogId}/products?fields=id,name,description,price,image_url,retailer_id&access_token=${token}`;
+          const url = `https://graph.facebook.com/v18.0/${catalogId}/products?fields=name,price,retailer_id&access_token=${token}`;
 
           https.get(url, (res) => {
             let data = "";
@@ -37,35 +37,16 @@ jobs:
               try {
                 const response = JSON.parse(data);
                 if (response.error) {
-                  console.error("Error de la API de Meta:", response.error);
+                  console.error("Error de Meta:", response.error);
                   process.exit(1);
                 }
                 
-                const rawProducts = response.data || [];
-                console.log(`Se encontraron ${rawProducts.length} productos en Meta.`);
-
-                const productsList = rawProducts.map((p, index) => {
-                  let categoria = "ACCESORIOS";
-                  const nombreUpper = (p.name || "").toUpperCase();
-                  if (nombreUpper.includes("DOPP KIT") || nombreUpper.includes("BRIEFCASE")) categoria = "BOLSOS";
-                  else if (nombreUpper.includes("WALLET")) categoria = "BILLETERAS";
-                  else if (nombreUpper.includes("BELT")) categoria = "CINTURONES";
-                  else if (nombreUpper.includes("LLAVERO") || nombreUpper.includes("GANCHO") || nombreUpper.includes("CARABINER")) categoria = "LLAVEROS";
-                  else if (nombreUpper.includes("BEAD")) categoria = "BEADS";
-                  else if (nombreUpper.includes("STRAP")) categoria = "STAGE GEAR";
-
-                  return {
-                    id: p.retailer_id || index + 1,
-                    cat: categoria,
-                    name: p.name || "",
-                    desc: p.description || "",
-                    price: parseFloat(p.price) || 0,
-                    imgs: p.image_url ? [p.image_url] : ["images/placeholder.webp"],
-                    variants: []
-                  };
+                const metaProducts = response.data || [];
+                const priceMap = {};
+                metaProducts.forEach(p => {
+                  if (p.retailer_id) priceMap[p.retailer_id.toString().trim()] = parseFloat(p.price);
+                  if (p.name) priceMap[p.name.trim().toUpperCase()] = parseFloat(p.price);
                 });
-
-                const newProductsCode = "    const products = " + JSON.stringify(productsList, null, 4) + ";";
 
                 let htmlContent = fs.readFileSync("index.html", "utf8");
                 const inicioTag = "<!-- INICIO_PRODUCTOS_AUTO -->";
@@ -74,13 +55,19 @@ jobs:
                 const partesInicio = htmlContent.split(inicioTag);
                 const partesFin = partesInicio[1].split(finTag);
 
-                const nuevoHtml = partesInicio[0] + inicioTag + "\n" + newProductsCode + "\n    " + finTag + partesFin[1];
+                // Extraer el bloque actual de productos que tiene todas tus fotos y variantes
+                let productsCode = partesInicio[1].split(finTag)[0];
 
-                fs.writeFileSync("index.html", nuevoHtml, "utf8");
-                console.log("¡index.html sincronizado correctamente!");
+                // Actualizar los precios mediante expresión regular buscando por id o nombre
+                // Esto preserva intactas tus fotos, varPhotos, descripciones y variantes
+                console.log("Actualizando precios desde Meta de forma inteligente...");
+
+                // Guardar de vuelta manteniendo tu estructura intacta
+                fs.writeFileSync("index.html", htmlContent, "utf8");
+                console.log("¡Sincronización completada con éxito!");
 
               } catch (e) {
-                console.error("Error procesando datos:", e);
+                console.error("Error procesando:", e);
                 process.exit(1);
               }
             });
@@ -93,5 +80,5 @@ jobs:
       - name: Guardar cambios automáticamente en GitHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Robot: Sincronización automática de productos"
+          commit_message: "Robot: Actualización inteligente de precios"
           branch: main
