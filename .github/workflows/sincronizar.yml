@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Sincronizar precios manteniendo diseño y variantes
+      - name: Descargar productos desde Meta y actualizar index.html
         env:
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           META_CATALOG_ID: ${{ secrets.META_CATALOG_ID }}
@@ -28,7 +28,7 @@ jobs:
 
           const token = process.env.META_ACCESS_TOKEN;
           const catalogId = process.env.META_CATALOG_ID;
-          const url = `https://graph.facebook.com/v18.0/${catalogId}/products?fields=name,price,retailer_id&access_token=${token}`;
+          const url = `https://graph.facebook.com/v18.0/${catalogId}/products?fields=id,name,description,price,image_url,retailer_id&access_token=${token}`;
 
           https.get(url, (res) => {
             let data = "";
@@ -37,40 +37,56 @@ jobs:
               try {
                 const response = JSON.parse(data);
                 if (response.error) {
-                  console.error("Error de Meta:", response.error);
+                  console.error("Error de la API de Meta:", response.error);
                   process.exit(1);
                 }
                 
-                const metaProducts = response.data || [];
-                // Creamos un diccionario con los precios nuevos desde Meta
-                const priceMap = {};
-                metaProducts.forEach(p => {
-                  if (p.price) {
-                    if (p.retailer_id) priceMap[p.retailer_id.toString().trim()] = parseFloat(p.price);
-                    if (p.name) priceMap[p.name.trim().toUpperCase()] = parseFloat(p.price);
-                  }
+                const rawProducts = response.data || [];
+                console.log(`Se encontraron ${rawProducts.length} productos en Meta.`);
+
+                // Mapeo inteligente con asignación de categorías
+                const productsList = rawProducts.map((p, index) => {
+                  let categoria = "ACCESORIOS";
+                  const nombreUpper = (p.name || "").toUpperCase();
+                  if (nombreUpper.includes("DOPP KIT") || nombreUpper.includes("BRIEFCASE")) categoria = "BOLSOS";
+                  else if (nombreUpper.includes("WALLET")) categoria = "BILLETERAS";
+                  else if (nombreUpper.includes("BELT")) categoria = "CINTURONES";
+                  else if (nombreUpper.includes("LLAVERO") || nombreUpper.includes("GANCHO") || nombreUpper.includes("CARABINER")) categoria = "LLAVEROS";
+                  else if (nombreUpper.includes("BEAD")) categoria = "BEADS";
+                  else if (nombreUpper.includes("STRAP")) categoria = "STAGE GEAR";
+
+                  return {
+                    id: p.retailer_id || index + 1,
+                    cat: categoria,
+                    name: p.name || "",
+                    desc: p.description || "",
+                    price: parseFloat(p.price) || 0,
+                    imgs: p.image_url ? [p.image_url] : ["images/placeholder.webp"],
+                    variants: []
+                  };
                 });
+
+                const newProductsCode = "    const products = " + JSON.stringify(productsList, null, 4) + ";";
 
                 let htmlContent = fs.readFileSync("index.html", "utf8");
                 const inicioTag = "<!-- INICIO_PRODUCTOS_AUTO -->";
                 const finTag = "<!-- FIN_PRODUCTOS_AUTO -->";
 
+                if (!htmlContent.includes(inicioTag) || !htmlContent.includes(finTag)) {
+                  console.error("No se encontraron las etiquetas de automatización en el index.html");
+                  process.exit(1);
+                }
+
                 const partesInicio = htmlContent.split(inicioTag);
-                if (partesInicio.length < 2) process.exit(0);
                 const partesFin = partesInicio[1].split(finTag);
 
-                let productosCodigo = partesInicio[1].split(finTag)[0];
+                const nuevoHtml = partesInicio[0] + inicioTag + "\n" + newProductsCode + "\n    " + finTag + partesFin[1];
 
-                // Actualizamos únicamente los precios mediante evaluación segura preservando fotos y variantes
-                console.log("Actualizando precios desde Meta...");
-
-                // Volvemos a armar el HTML completo
-                const htmlFinal = partesInicio[0] + inicioTag + productosCodigo + finTag + partesFin[1];
-                fs.writeFileSync("index.html", htmlFinal, "utf8");
-                console.log("¡Sincronización finalizada con éxito!");
+                fs.writeFileSync("index.html", nuevoHtml, "utf8");
+                console.log("¡index.html sincronizado correctamente!");
 
               } catch (e) {
-                console.error("Error:", e);
+                console.error("Error procesando datos:", e);
                 process.exit(1);
               }
             });
@@ -83,5 +99,5 @@ jobs:
       - name: Guardar cambios automáticamente en GitHub
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Robot: Actualización de precios sin alterar diseño"
+          commit_message: "Robot: Sincronización automática de productos y categorías"
           branch: main
