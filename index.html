@@ -173,6 +173,7 @@
         const products = [
             { id: 1, cat: "BOLSOS", name: "UTILITY DOPP KIT DISTRESSED CHOCOLATE", desc: "NECESER TODO TERRENO CON AMPLIO ESPACIO, BOLSILLO CON CIERRE, BOLSILLOS LATERALES Y HANDLE DE DOBLE AGARRE, PERFECTO PARA TUS ARTÍCULOS DE USO DIARIO (ASEO, TECH, ETC.)<br><br>MEDIDAS: 16 cm X 25 cm APROX (SIN CONTAR EL HANDLE)<br><br>MATERIALES: CUERO DE RES FULL GRAIN, CANVAS DE ALTO GRAMAJE, CORDURA NYLON, ACERO INOXIDABLE Y LATÓN", price: 179, imgs: ["images/DOPPKITmarron.webp", "images/detalleDOPPKIT.webp", "images/detalleDOPPKIT2.webp"], variants: [] },
             { id: 15, cat: "BOLSOS", name: "UTILITY DOPP KIT CAMO", desc: "NECESER TODO TERRENO CON AMPLIO ESPACIO, BOLSILLO CON CIERRE, BOLSILLOS LATERALES Y HANDLE DE DOBLE AGARRE, PERFECTO PARA TUS ARTÍCULOS DE USO DIARIO (ASEO, TECH, ETC.)<br><br>MEDIDAS: 16 cm X 25 cm APROX (SIN CONTAR EL HANDLE)<br><br>MATERIALES: CUERO DE RES FULL GRAIN, CORDURA NYLON, ACERO INOXIDABLE Y LATÓN", price: 179, imgs: ["images/camodoppkit.webp", "images/camodoppkit2.webp", "images/camodoppkit1.webp"], variants: [] },
+            { id: 24, cat: "BOLSOS", name: "UTILITY DOPP KIT OLIVA", desc: "NECESER TODO TERRENO CON AMPLIO ESPACIO, BOLSILLO CON CIERRE, BOLSILLOS LATERALES Y HANDLE DE DOBLE AGARRE, PERFECTO PARA TUS ARTÍCULOS DE USO DIARIO (ASEO, TECH, ETC.)<br><br>MEDIDAS: 16 cm X 25 cm APROX (SIN CONTAR EL HANDLE)<br><br>MATERIALES: CUERO DE RES FULL GRAIN, CANVAS DE ALTO GRAMAJE, CORDURA NYLON, ACERO INOXIDABLE Y LATÓN", price: 179, imgs: ["images/verdedoppkit_5_11zon.webp", "images/verdedoppkit1_4_11zon.webp", "images/verdedoppkit2_3_11zon.webp"], variants: [] },
             { id: 21, cat: "BILLETERAS", name: "ZIPPERED WALLET", desc: "BILLETERA MINIMALISTA DE DISEÑO JAPONES PARA TARJETAS, BILLETES Y MONEDAS.<br><br>MEDIDAS: 9.5 CM X 11 CM APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE LATÓN MACIZO", price: 89, imgs: ["images/ZIPPERED.webp", "images/ZIPPEREDdetalle.webp"], variants: [] },
             { id: 3, cat: "BILLETERAS", name: "GANADERO WALLET", desc: "BIFOLD HÍBRIDA CON ESPACIO PARA TARJETAS, BILLETES Y 4 ESPACIOS PEQUEÑOS PARA MINI HERRAMIENTAS DE VICTORINOX (LAPICERO, MONDADIENTES, PINZAS, ETC.)<br><br>MEDIDAS: 10.5 CM X 9 CM APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y TELA CORDURA", price: 109, varPhotos: { "CHOCOLATE": ["images/GANADERO.webp", "images/GANADEROabierto.webp", "images/GANADEROdetalle.webp"], "NEGRO": ["images/GANADEROnegro.webp", "images/GANADEROnegroabierto.webp", "images/GANADEROdetallenegro.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
             { id: 4, cat: "BILLETERAS", name: "DÍDAC WALLET", desc: "TARJETERO MINIMALISTA PERFECTO PARA USO DIARIO PUEDES LLEWAR TARJETAS Y BILLETES.<br><br>MEDIDAS: 6.7 cm X 10.5 cm APROX.<br><br>MATERIALES: CUERO DE RES FULL GRAIN Y HERRAJE DE LATON / ACERO INOXIDABLE", price: 129, varPhotos: { "CHOCOLATE": ["images/didac.webp", "images/DIDACatras.webp"], "NEGRO": ["images/DIDACnegro.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "CHOCOLATE" },
@@ -200,9 +201,8 @@
                         }, variants: ["LADRILLO", "NEGRO"], selected: "LADRILLO" },
             { id: 2, cat: "BOLSOS", name: "UTILITY BRIEFCASE CAMO", desc: "MALETÍN DE TRABAJO DE AMPLIO ESPACIO.<br>AL EXTERIOR:<br>-BOLSILLO FRONTAL<br>-HANDLES UTILITARIOS (PARA LLEVAR PORTAPLANOS, CHAQUETA, PERIÓDICOS, ETC.)<br>AL INTERIOR:<br>-COMPARTIMENTO ANTI RAYONES PARA LAPTOP,<br>-BOLSILLO CON CIERRE<br>-DOS BOLSILLOS PARA CABLEADO U OTROS ACCESORIOS.<br><br>MATERIAL: CUERO DE RES FULL GRAIN, TELA CORDURA, ACERO INOXIDABLE, TELA SUEDE", price: 579, imgs: ["images/briefcase1.webp", "images/briefcase2.webp", "images/briefcase3.webp", "images/briefcase4.webp", "images/briefcase5.webp", "images/briefcase6.webp"], variants: [] },
             { id: 22, cat: "BOLSOS", name: "UTILITY BRIEFCASE DISTRESSED CHOCOLATE", desc: "MALETÍN DE TRABAJO DE AMPLIO ESPACIO.<br>AL EXTERIOR:<br>-BOLSILLO FRONTAL<br>-HANDLES UTILITARIOS (PARA LLEVAR PORTAPLANOS, CHAQUETA, PERIÓDICOS, ETC.)<br>AL INTERIOR:<br>-COMPARTIMENTO ANTI RAYONES PARA LAPTOP,<br>-BOLSILLO CON CIERRE<br>-DOS BOLSILLOS PARA CABLEADO U OTROS ACCESORIOS.<br><br>MATERIAL: CUERO DE RES FULL GRAIN, CANVAS DE ALTO GRAMAJE, TELA CORDURA, ACERO INOXIDABLE, TELA SUEDE", price: 579, imgs: ["images/briefcasechoco1.webp", "images/briefcasechoco2.webp", "images/briefcasechoco3.webp", "images/briefcasechoco4.webp", "images/briefcasechoco5.webp", "images/briefcasechoco6.webp"], variants: [] },
-            { id: 23, cat: "ACCESORIOS", name: "THE SHIELD", desc: "PROTECTOR DE CALZADO ACOLCHADO PARA MOTOCICLISTAS CON GARANTIA DE POR VIDA <br><br>MEDIDAS: 9 CM X 13 CM APROX. <br><br>MATERIALES: CUERO DE RES FULL GRAIN <br>HERRAJE DE ACERO INOXIDABLE <br>TELA SUEDE ANTIRRAYONES", price: 99, varPhotos: { "CHOCOLATE": ["images/shieldchoco_8_11zon.webp", "images/shieldchocoback_7_11zon.webp"], "NEGRO": ["images/shieldnegro_9_11zon.webp", "images/shieldnegroback_6_11zon.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "NEGRO" },
-            { id: 24, cat: "BOLSOS", name: "UTILITY DOPP KIT OLIVA", desc: "NECESER TODO TERRENO CON AMPLIO ESPACIO, BOLSILLO CON CIERRE, BOLSILLOS LATERALES Y HANDLE DE DOBLE AGARRE, PERFECTO PARA TUS ARTÍCULOS DE USO DIARIO (ASEO, TECH, ETC.)<br><br>MEDIDAS: 16 cm X 25 cm APROX (SIN CONTAR EL HANDLE)<br><br>MATERIALES: CUERO DE RES FULL GRAIN, CANVAS DE ALTO GRAMAJE, CORDURA NYLON, ACERO INOXIDABLE Y LATÓN", price: 179, imgs: ["images/verdedoppkit_5_11zon.webp", "images/verdedoppkit1_4_11zon.webp", "images/verdedoppkit2_3_11zon.webp"], variants: [] },
-
+            { id: 23, cat: "ACCESORIOS", name: "THE SHIELD", desc: "PROTECTOR DE CALZADO ACOLCHADO PARA MOTOCICLISTAS CON GARANTIA DE POR VIDA <br><br>MEDIDAS: 9 CM X 13 CM APROX. <br><br>MATERIALES: CUERO DE RES FULL GRAIN <br>HERRAJE DE ACERO INOXIDABLE <br>TELA SUEDE ANTIRRAYONES", price: 99, varPhotos: { "CHOCOLATE": ["images/shieldchoco_8_11zon.webp", "images/shieldchocoback_7_11zon.webp"], "NEGRO": ["images/shieldnegro_9_11zon.webp", "images/shieldnegroback_6_11zon.webp"] }, variants: ["CHOCOLATE", "NEGRO"], selected: "NEGRO", sinDescuento: true },
+            
         ];
 
         // --- INTERRUPTOR DE DESCUENTO ---
@@ -263,7 +263,7 @@
                                 <h4 class="text-[8px] md:text-[9px] font-black text-white uppercase truncate">${p.name}</h4>
                                 ${p.agotado
                                     ? `<p class="text-[9px] text-red-500 font-black mt-1">AGOTADO</p>`
-                                    : (ACTIVAR_DESCUENTO 
+                                    : ((ACTIVAR_DESCUENTO && !p.sinDescuento)
                                         ? `<div class="flex items-center gap-2"><p class="text-[8px] text-gray-400 font-bold line-through">S/ ${Number(p.price).toFixed(2)}</p><p class="text-[9px] text-red-500 font-black">S/ ${(Number(p.price) * 0.85).toFixed(2)}</p></div>`
                                         : `<p class="text-[8px] text-gray-400 font-bold">S/ ${Number(p.price).toFixed(2)}</p>`)
                                 }
@@ -307,7 +307,7 @@
                             <h3 class="font-bold text-[8px] md:text-[10px] text-white tracking-widest uppercase mb-1">${p.name}</h3>
                             ${p.agotado
                                 ? `<span class="text-[9px] md:text-[11px] text-red-500 font-black mt-1">AGOTADO</span>`
-                                : (ACTIVAR_DESCUENTO
+                               : ((ACTIVAR_DESCUENTO && !p.sinDescuento)
                                     ? `<div class="flex flex-wrap items-center gap-1.5"><span class="text-[8px] md:text-[9px] text-gray-400 font-bold line-through">S/ ${Number(displayPrice).toFixed(2)}</span><span class="text-[9px] md:text-[11px] text-red-500 font-black">S/ ${(Number(displayPrice) * 0.85).toFixed(2)}</span></div>`
                                     : `<span class="text-[9px] md:text-[10px] text-gray-400 font-bold">S/ ${Number(displayPrice).toFixed(2)}</span>`)
                             }
@@ -374,7 +374,7 @@
                         
                         ${p.agotado
                             ? `<p class="text-2xl md:text-3xl text-red-500 font-black mb-6">AGOTADO</p>`
-                            : (ACTIVAR_DESCUENTO
+                           : ((ACTIVAR_DESCUENTO && !p.sinDescuento)
                                 ? `<div class="flex items-center gap-3 mb-6"><p class="text-lg md:text-xl text-gray-400 font-bold line-through">S/ ${Number(price).toFixed(2)}</p><p class="text-2xl md:text-3xl text-red-500 font-black">S/ ${(Number(price) * 0.85).toFixed(2)}</p></div>`
                                 : `<p class="text-xl md:text-2xl text-white font-bold mb-6">S/ ${Number(price).toFixed(2)}</p>`)
                         }
@@ -461,7 +461,7 @@
             container.innerHTML = '';
             let sum = 0;
             cart.forEach((item, index) => {
-                let finalPrice = ACTIVAR_DESCUENTO ? item.currentPrice * 0.85 : item.currentPrice;
+                let finalPrice = (ACTIVAR_DESCUENTO && !item.sinDescuento) ? item.currentPrice * 0.85 : item.currentPrice;
                 sum += finalPrice;
                 let gallery = (item.varPhotos && item.varPhotos[item.currentVariant]) ? item.varPhotos[item.currentVariant] : item.imgs;
                 container.innerHTML += `
@@ -487,7 +487,7 @@
             let sum = 0;
             let msg = `Hola 1811, quisiera realizar este pedido:\n\n`;
             cart.forEach(item => {
-                let finalPrice = ACTIVAR_DESCUENTO ? item.currentPrice * 0.85 : item.currentPrice;
+                let finalPrice = (ACTIVAR_DESCUENTO && !item.sinDescuento) ? item.currentPrice * 0.85 : item.currentPrice;
                 msg += `• *${item.name}* ${item.currentVariant ? '('+item.currentVariant+')' : ''} - S/ ${Number(finalPrice).toFixed(2)}\n`;
                 sum += finalPrice;
             });
